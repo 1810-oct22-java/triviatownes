@@ -1,17 +1,3 @@
-# Project Overall Design
----
-##### **Client Side**:
-##### *&nbsp;&nbsp;&nbsp;&nbsp; Pages
-#### >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Landing Page:
-- Join private button is clicked:
-&nbsp;&nbsp; - *lobby key input cannot be empty*
-&nbsp;&nbsp;- Sends ajax request to server with 'lobby key'
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* **Sucess:** User is connected to "/lobby" page
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* **Failer:** Modal informs the user the key is not valid
-- A category is clicked:
-&nbsp;&nbsp;- Sends ajax request to server with 'selected category'
-&nbsp;&nbsp;- User is brought to [/lobbies] page filtered by selected category
-
 # Servlets:
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Landing Page
 ###### LandingPageServlet: ['/']()
