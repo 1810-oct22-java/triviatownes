@@ -1,3 +1,6 @@
+# Project Enviroment
+*.EnviromentVariables
+
 # Eclipse
 .classpath
 .project
