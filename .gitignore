@@ -1,6 +1,6 @@
 # Project Enviroment
-src/main/java/com/ex/env/EnviromentVariables.java
-src/main/resources/database.properties
+src/main/java/com/ex/env/
+src/main/resources/
 
 # Eclipse
 .classpath
