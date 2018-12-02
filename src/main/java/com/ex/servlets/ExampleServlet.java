@@ -23,12 +23,6 @@ public class ExampleServlet extends HttpServlet {
 		
 		String hello = "test";
 		
-		ConnectionFactory cf = ConnectionFactory.getInstance();
-		
-		System.out.println(cf.getTest1());
-		
-		cf.setTest1("I was changed");
-		
 		//convert to JSON
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(hello);

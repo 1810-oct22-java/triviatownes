@@ -17,10 +17,19 @@
 ## EnviromentVariables
 - Everyone will have a different path to the database properties file, and possibly other resources
 - The problem is we can't push our ConnectionFactory file if the database.properties file path is different for all of us.
-- The solution is to use a com.ex.envEnviromentVariables file that is only pushed to github once, and never pushed again
-- In this file we can set our file paths and push all our files without messing up everyone elses project
-- All the variables in this file will be static because they never need to changed after you set them the first time.
-- This file will be in the .gitingore file 
+- Add the database.properties file in (src/main/resources.database.properties)
+- Add this file: (src/main/java/com.ex.env.EnviromentVariables.java)
+- Make sure you put these files in the correct place!
+```
+package com.ex.env;
+public class EnviromentVariables {
+	
+	//Example: You will need to change this to match your own system path to the database.properties file
+	static String dbPropertiesPath = "..../database.properties";
+
+}
+```
+
 
 ## Gitingore
 I created a .gitignore file that should allow us to all work on
