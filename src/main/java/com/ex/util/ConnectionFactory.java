@@ -1,25 +1,18 @@
 package com.ex.util;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
 import org.apache.log4j.Logger;
 
 public class ConnectionFactory {
 	
 	private static ConnectionFactory cf = null;
 	private static Logger logger = Logger.getLogger(ConnectionFactory.class);
-
-	private String test1 = "Test";
-
-	public String getTest1(){
-		return this.test1;
-	}
-
-	public void setTest1(String hello){
-		this.test1 = hello;
-	}
-	
-	private ConnectionFactory() {
-		logger.trace("Made Connection Factory");
-	}
 	
 	public static synchronized ConnectionFactory getInstance() {
 			if(cf == null) cf = new ConnectionFactory();
@@ -33,11 +26,11 @@ public class ConnectionFactory {
 	 * - has information about DB tables, stored procedures, and 
 	 * all other related db objects. 
 	 */
-	/*
+	
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
-		//String path = "C:/Users/Genesis/my_git_repos/1810-oct22/Week2/jdbc/bookstore-jdbc/src/main/resources/database.properties";
+
 		String path = "C:/Users/Genesis/my_git_repos/1810-oct22/Week2/jdbc/bookstore-jdbc/src/main/resources/database.properties";
 		
 			try {
@@ -51,7 +44,7 @@ public class ConnectionFactory {
 				 * managing a set of JDBC drivers. As part of its 
 				 * initialization, the DriverManager class will 
 				 * attempt to load the driver class referenced previously
-				 *
+				 */
 				conn = DriverManager.getConnection(
 						prop.getProperty("url"), 
 						prop.getProperty("usr"), 
@@ -65,6 +58,4 @@ public class ConnectionFactory {
 			}
 		return conn;
 	}
-	*/
-
 }

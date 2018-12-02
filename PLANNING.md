@@ -54,5 +54,38 @@
 - Client sends answer to the server
 - Server adds this message to the chat
 
+#Functionalitly Overview
+
+##### LeaderBoardSpecs
+
+* GlobalLeaderBoardsComponent
+- Will be sorted by overall score and limited to 25 rows
+- Uses ajax to request the leader boards table at load time
+- Has a refresh button to request the current data
+- Uses AngularDataTables
+- Has a back button
+
+* GlobalStatsDBTable
+- Has a row for each player of each game
+- Each column is a particular stat (score, max-streak, average-time, ect). Think of as many as you can within reason.
+
+* GlobalLeaderBoardsBean
+- Make a private variable for every column
+- Auto generate getters and mutators
+
+* GlobalLeaderBoardsDAO
+- Write the function to get the data
+- Write the function to add a record
+
+* GlobalLeaderBoardsService
+- This is where you write the function to call the DAO
+- The function can be static
+
+* GetGlobalLeaderBoardsServlet
+- Get the leaderboards data from the service
+- Map the Bean to a json string (like we've been doing)
+- Send the json to the client
+
+
 ###### GlobalLeaderBoardsServlet: ['/global-leaderboards']()
 - 
