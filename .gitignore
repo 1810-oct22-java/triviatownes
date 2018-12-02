@@ -1,5 +1,5 @@
 # Project Enviroment
-*.EnviromentVariables
+src/main/java/com/ex/env/EnviromentVariables.java
 src/main/resources/database.properties
 
 # Eclipse
