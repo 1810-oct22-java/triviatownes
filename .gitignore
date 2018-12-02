@@ -1,5 +1,6 @@
 # Project Enviroment
-*.EnviromentVariables
+src/main/java/com/ex/env/
+src/main/resources/
 
 # Eclipse
 .classpath
