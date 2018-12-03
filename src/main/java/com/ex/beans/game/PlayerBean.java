@@ -8,6 +8,7 @@ public class PlayerBean {
 	//0 = a, 1 = b, 2 = c, 3 = d
 	private int currentAnswer;
 	
+	//the order in which the usere answered the question
 	private int currentAnswerPosition;
 	
 	private int score;

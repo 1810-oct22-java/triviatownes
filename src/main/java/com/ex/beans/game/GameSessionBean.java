@@ -28,9 +28,13 @@ public class GameSessionBean {
 	 * This is a serializable list of currentPlayers
 	 * 
 	 * */
-	ArrayList<StringBuffer> currentPlayers;
+	ArrayList<PlayerBean> currentPlayers;
 	
 	
+	/*
+	 * This is a serializable 
+	 * 
+	 * */
+	ArrayList<MultipleChoiceQuestionBean> Questions;
 	
-
 }
