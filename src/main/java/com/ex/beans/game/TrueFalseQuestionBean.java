@@ -11,7 +11,7 @@ public class TrueFalseQuestionBean implements QuestionInterface {
 	}
 
 	@Override
-	public void setAnswer(StringBuilder answer) {
+	public void setAnswer(int answer) {
 		// TODO Auto-generated method stub
 		
 	}

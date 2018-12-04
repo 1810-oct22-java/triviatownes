@@ -1,6 +1,6 @@
 # Servlets:
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Landing Page
-###### LandingPageServlet: ['/']()
+###### LandingPageServlet: ['/new-user']()
 - Client sends request to sever when user hits this page and new session id is assigned to the user. The app will not reconnect to an existing game that they have left.
 
 ###### JoinLobbyServlet: ['/connect-to-lobby']()

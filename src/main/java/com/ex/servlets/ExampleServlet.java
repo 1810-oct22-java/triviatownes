@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import com.ex.util.ConnectionFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet("/example")
 public class ExampleServlet extends HttpServlet {
 	
 	private static Logger logger = Logger.getLogger(ExampleServlet.class);
@@ -23,7 +22,7 @@ public class ExampleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String hello = "test";
+		String hello = "test2";
 	
 		//convert to JSON
 		ObjectMapper mapper = new ObjectMapper();
