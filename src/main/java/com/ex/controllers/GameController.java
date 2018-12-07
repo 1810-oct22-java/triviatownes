@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/game")
 public class GameController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public String home() {
-		return "Welcome to Spring MVC!";
+		return "Welcome to Trivia Town Game!";
 	}
 
 }
