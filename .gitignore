@@ -1,3 +1,7 @@
+# Project Enviroment
+src/main/java/com/ex/env/
+src/main/resources/
+
 # Eclipse
 .classpath
 .project

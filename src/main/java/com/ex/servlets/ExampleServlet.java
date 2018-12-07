@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.ex.util.ConnectionFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ExampleServlet extends HttpServlet {
@@ -21,14 +20,8 @@ public class ExampleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String hello = "test";
-		
-		ConnectionFactory cf = ConnectionFactory.getInstance();
-		
-		System.out.println(cf.getTest1());
-		
-		cf.setTest1("I was changed");
-		
+		String hello = "test2";
+	
 		//convert to JSON
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(hello);

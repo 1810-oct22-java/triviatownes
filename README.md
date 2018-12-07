@@ -11,6 +11,25 @@
 - Run the server and navigate to /example in the browser
 - If all goes well "testing" will show up on the window
 - Let me know if you have any issues getting the server to run
+- Follow the steps provided in the CORS section of this document
+- 
+
+## EnviromentVariables
+- Everyone will have a different path to the database properties file, and possibly other resources
+- The problem is we can't push our ConnectionFactory file if the database.properties file path is different for all of us.
+- Add the database.properties file in (src/main/resources.database.properties)
+- Add this file: (src/main/java/com.ex.env.EnviromentVariables.java)
+- Make sure you put these files in the correct place!
+```
+package com.ex.env;
+public class EnviromentVariables {
+	
+	//Example: You will need to change this to match your own system path to the database.properties file
+	static String dbPropertiesPath = "..../database.properties";
+
+}
+```
+
 
 ## Gitingore
 I created a .gitignore file that should allow us to all work on
@@ -45,6 +64,10 @@ in eclipse.
     <init-param>
         <param-name>cors.exposed.headers</param-name>
         <param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
+    </init-param>
+    <init-param>
+    	<param-name>cors.support.credentials</param-name>
+    	<param-value>true</param-value>
     </init-param>
 </filter>
 <filter-mapping>
