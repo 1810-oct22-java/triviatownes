@@ -2,6 +2,8 @@ package com.ex.beans.game;
 
 import java.util.ArrayList;
 
+import com.ex.interfaces.game.QuestionInterface;
+
 public class GameSessionBean {
 	
    /*
@@ -35,6 +37,6 @@ public class GameSessionBean {
 	 * This is a serializable 
 	 * 
 	 * */
-	ArrayList<MultipleChoiceQuestionBean> Questions;
+	ArrayList<QuestionInterface> Questions;
 	
 }
