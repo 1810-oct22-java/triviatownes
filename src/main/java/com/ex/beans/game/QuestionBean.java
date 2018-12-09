@@ -2,7 +2,7 @@ package com.ex.beans.game;
 
 import java.util.Arrays;
 
-public class Results {
+public class QuestionBean {
 	
 	private String category;
 	private String type;
@@ -59,5 +59,6 @@ public class Results {
 		sb.append("Incorrect answer: " + Arrays.toString(getIncorrect_answers()) + "\n");
 		return sb.toString();
 	}
+
 
 }

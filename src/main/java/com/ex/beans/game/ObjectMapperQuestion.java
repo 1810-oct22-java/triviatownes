@@ -2,32 +2,45 @@ package com.ex.beans.game;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ObjectMapperQuestion {
 	
-	//Turn JSON into array results
+	//Turn JSON into question arrayList 
 	public static void main(String[] args) {
 		try {
-			Results[] result;
 			
-			ObjectJSON obj = readJsonWithObjectMapper();
-			result = obj.getResults();
-			for(Results r : result ) {
-				System.out.println(r);
+			String url = "https://opentdb.com/api.php?amount=10";
+			
+			
+			List<QuestionBean> questionList = new ArrayList<>();
+			
+			QuestionBean[] question;
+			
+			ObjectJSON obj = readJsonWithObjectMapper(url);
+			
+			question = obj.getResults();
+			
+			for(QuestionBean q : question ) {
+				questionList.add(q);
 			}
+			
+			System.out.println(questionList);
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
 
 	//Read JSON from trivia api and turn it into object
-	public static ObjectJSON readJsonWithObjectMapper() throws IOException {
+	public static ObjectJSON readJsonWithObjectMapper(String urlApi) throws IOException {
 		
-		String query_url = "https://opentdb.com/api.php?amount=10";
-        URL url = new URL(query_url);
+	
+        URL url = new URL(urlApi);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectJSON obj = mapper.readValue(url, ObjectJSON.class);
