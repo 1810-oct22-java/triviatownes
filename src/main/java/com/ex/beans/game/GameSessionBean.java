@@ -13,6 +13,18 @@ public class GameSessionBean {
 	* */
 	int instanceId;
 	
+	StringBuffer joinKey;
+	
+	public StringBuffer getJoinKey() {
+		return joinKey;
+	}
+
+
+	public void setJoinKey(StringBuffer joinKey) {
+		this.joinKey = joinKey;
+	}
+
+
 	/*
 	 * Is used to easily get the current instance state
 	 * 0 = waiting, 1 = playing, 2 = game-end, 3 = finished
