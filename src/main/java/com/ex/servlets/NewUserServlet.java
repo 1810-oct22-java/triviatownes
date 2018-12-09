@@ -17,8 +17,6 @@ public class NewUserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.trace("Hello");
-		
 		//No matter what create a new session if they call this servlet
 		HttpSession session = req.getSession(false);
 		if (session == null) {
@@ -28,6 +26,8 @@ public class NewUserServlet extends HttpServlet {
 			logger.trace("Yup, we're guchi");
 			session.invalidate();
 			session = req.getSession(true);
+			
+			
 		}
 		
 		//Set ok status code
