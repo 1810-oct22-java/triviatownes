@@ -26,11 +26,126 @@ public class GameSessionBean {
 	 * */
 	StringBuffer globalChatBuffer;
 	
+	
+	/*
+	 * This is used to track the category
+	 * Must be thread safe
+	 * */
+	StringBuffer category;
+	
+	StringBuffer difficulty;
+	
+	StringBuffer name;
+	
+	StringBuffer scope;
+	
+	public synchronized int getInstanceId() {
+		return instanceId;
+	}
+
+
+	public synchronized void setInstanceId(int instanceId) {
+		this.instanceId = instanceId;
+	}
+
+
+	public synchronized StringBuffer getState() {
+		return state;
+	}
+
+
+	public synchronized void setState(StringBuffer state) {
+		this.state = state;
+	}
+
+
+	public synchronized StringBuffer getGlobalChatBuffer() {
+		return globalChatBuffer;
+	}
+
+
+	public synchronized void setGlobalChatBuffer(StringBuffer globalChatBuffer) {
+		this.globalChatBuffer = globalChatBuffer;
+	}
+
+
+	public synchronized StringBuffer getCategory() {
+		return category;
+	}
+
+
+	public synchronized void setCategory(StringBuffer category) {
+		this.category = category;
+	}
+
+
+	public synchronized StringBuffer getDifficulty() {
+		return difficulty;
+	}
+
+
+	public synchronized void setDifficulty(StringBuffer difficulty) {
+		this.difficulty = difficulty;
+	}
+
+
+	public synchronized StringBuffer getName() {
+		return name;
+	}
+
+
+	public synchronized void setName(StringBuffer name) {
+		this.name = name;
+	}
+
+
+	public synchronized StringBuffer getScope() {
+		return scope;
+	}
+
+
+	public synchronized void setScope(StringBuffer scope) {
+		this.scope = scope;
+	}
+
+
+	public synchronized ArrayList<PlayerBean> getCurrentPlayers() {
+		return currentPlayers;
+	}
+
+
+	public synchronized void setCurrentPlayers(ArrayList<PlayerBean> currentPlayers) {
+		this.currentPlayers = currentPlayers;
+	}
+
+
+	public synchronized int getMaxPlayers() {
+		return maxPlayers;
+	}
+
+
+	public synchronized void setMaxPlayers(int maxPlayers) {
+		this.maxPlayers = maxPlayers;
+	}
+
+
+	public synchronized ArrayList<QuestionInterface> getQuestions() {
+		return Questions;
+	}
+
+
+	public synchronized void setQuestions(ArrayList<QuestionInterface> questions) {
+		Questions = questions;
+	}
+
+
 	/*
 	 * This is a serializable list of currentPlayers
 	 * 
 	 * */
 	ArrayList<PlayerBean> currentPlayers;
+	
+	int maxPlayers;
 	
 	
 	/*
