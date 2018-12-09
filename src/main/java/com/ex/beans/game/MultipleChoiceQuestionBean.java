@@ -1,35 +1,48 @@
 package com.ex.beans.game;
 
 import com.ex.interfaces.game.QuestionInterface;
+import org.springframework.stereotype.Component;
 
-public class MultipleChoiceQuestionBean implements QuestionInterface{
+@Component
+public class MultipleChoiceQuestionBean{
 	
-	private StringBuilder question;
-	private int answer;
-	private StringBuilder a;
-	private StringBuilder b;
-	private StringBuilder c;
-	private StringBuilder d;
+	private boolean isMultipleChoice; 
+	private String category;
+	private String difficulty;
+	private String question;
+	private String[] answers;
 	
-	@Override
-	public Boolean checkAnswer(int answer) {
-		
-		if(answer == this.answer) return true;
-		return false;
+	public MultipleChoiceQuestionBean(String category, String difficulty, String question, String[] answers) {
+		super();
+		this.category = category;
+		this.difficulty = difficulty;
+		this.question = question;
+		this.answers = answers;
 	}
-	@Override
-	public void setAnswer(int answer) {
-		this.answer = answer;
+	public String getCategory() {
+		return category;
 	}
-	@Override
-	public int getAnswer() {
-		return this.answer;
+	public void setCategory(String category) {
+		this.category = category;
 	}
-	@Override
-	public void setOption(StringBuilder option, int place) {
-		if(place == 0) this.a = new StringBuilder(option);
-		if(place == 1) this.b = new StringBuilder(option);
-		if(place == 2) this.c = new StringBuilder(option);
-		if(place == 3) this.d = new StringBuilder(option);
+	public String getDifficulty() {
+		return difficulty;
 	}
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
+	public String getQuestion() {
+		return question;
+	}
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	public String[] getAnswers() {
+		return answers;
+	}
+	public void setAnswers(String[] answers) {
+		this.answers = answers;
+	}
+	
+	
 }

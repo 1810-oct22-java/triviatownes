@@ -12,7 +12,7 @@ public class GameController {
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public String home() {
-		return "Welcome to Spring MVC!";
+		return "Welcome to Trivia Town Game!";
 	}
 
 }
