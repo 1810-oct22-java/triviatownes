@@ -15,12 +15,12 @@ import com.ex.services.LeaderboardService;
 @RequestMapping("/leaders")
 public class LeaderboardController {
 
-	@Autowired
-	private LeaderboardService ls;
+	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public List<LeaderboardBean> getAll() {
+		LeaderboardService ls = new LeaderboardService();
 		return ls.getAll();
 	}
 }
