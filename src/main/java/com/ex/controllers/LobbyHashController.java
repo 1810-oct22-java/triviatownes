@@ -20,15 +20,15 @@ import com.google.gson.Gson;
 @CrossOrigin(origins = "*")
 public class LobbyHashController {
 	
-	private static Logger logger = Logger.getLogger(NewUserController.class);
+	//private static Logger logger = Logger.getLogger(NewUserController.class);
 	
 	@MessageMapping("{category}/get-lobby-data")
 	@SendTo("/lobbies-hash/{category}/get-lobby-data")
 	@CrossOrigin(origins = "*")
 	public int connect(@DestinationVariable String category,SimpMessageHeaderAccessor headerAccessor){
 		
-		logger.trace(category);
-		logger.trace("Hello");
+	//	logger.trace(category);
+	//	logger.trace("Hello");
 		
 		GameManagerService gm = GameManagerService.getInstance();
 		
@@ -42,7 +42,7 @@ public class LobbyHashController {
 		
 		
 		 
-		logger.trace(jsonHash);
+	//	logger.trace(jsonHash);
 		
 		return jsonHash;
 	}

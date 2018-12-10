@@ -13,8 +13,8 @@ public interface UserRepository extends JpaRepository<HighScoreBean, Integer> {
 	
 	public PlayerBean findByUsernameLikeIgnoreCase(String username);
 	
-	@Query("SELECT * FROM GLOBALSTATS")
-	public List<HighScoreBean> oddQuery();
+	//@Query("SELECT * FROM GLOBALSTATS")
+	//public List<HighScoreBean> oddQuery();
 
-	
+	public List<HighScoreBean> findAll();
 }
