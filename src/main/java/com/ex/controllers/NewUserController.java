@@ -48,9 +48,6 @@ public class NewUserController {
 			logger.trace("Yup, we're guchi");
 			session.invalidate();
 			session = req.getSession(true);
-			
-			if(!GameManagerService.getInstance().isFilled())
-				GameManagerService.getInstance().makeDummyList();
 		}
 		return null;
 	}
