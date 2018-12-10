@@ -23,14 +23,15 @@ public class WebSocketConfig  implements WebSocketMessageBrokerConfigurer {
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/select-lobby-hash").setAllowedOrigins("*");
 		registry.addEndpoint("/join-waiting-lobby").setAllowedOrigins("*");
+		registry.addEndpoint("/join-game-session").setAllowedOrigins("*");
 	}
 	
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/lobbies-hash");
-		registry.enableSimpleBroker("/join-waiting");
-		registry.setApplicationDestinationPrefixes("/lobby-hash-update");
-		registry.setApplicationDestinationPrefixes("/send-waiting-info");
+		//registry.enableSimpleBroker("/lobbies-hash");
+		registry.enableSimpleBroker("/waiting","/lobbies-hash", "/send-game-update");
+		registry.setApplicationDestinationPrefixes("/waiting-update","/lobby-hash-update","/game-update");
+		//registry.setApplicationDestinationPrefixes("/waiting-update");
 	}
 
 	@Override

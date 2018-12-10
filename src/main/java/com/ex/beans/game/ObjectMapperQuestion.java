@@ -16,6 +16,8 @@ public class ObjectMapperQuestion {
 			result = obj.getResults();
 			for(Results r : result ) {
 				System.out.println(r);
+				
+				
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

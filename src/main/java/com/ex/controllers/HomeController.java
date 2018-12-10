@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value="/home")
 public class HomeController {
 	
-	@RequestMapping(method=RequestMethod.GET, value="/home/test")
+	@RequestMapping(method=RequestMethod.GET, value="/test")
 	public String home(HttpServletResponse resp, HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();

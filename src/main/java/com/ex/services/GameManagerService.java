@@ -85,7 +85,7 @@ public class GameManagerService {
 			
 			getGame(tempId).setInstanceId(tempId);
 			
-			getGame(tempId).setJoinKey(count + "");
+			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
 			count  = count + 1;
 		}
 		
@@ -110,7 +110,7 @@ public class GameManagerService {
 			
 			getGame(tempId).setInstanceId(tempId);
 			
-			getGame(tempId).setJoinKey(count + "");
+			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
 			count  = count + 1;
 		}
 		
@@ -153,7 +153,8 @@ public class GameManagerService {
 	synchronized public GameSessionBean getGameByKey(StringBuffer key) {
 		
 		for(int i = 0; i < this.gameList.size(); i++) {
-			if(gameList.get(i).getJoinKey().equals(key)) {
+			
+			if(gameList.get(i).getJoinKey().toString().equals(key.toString())) {
 				return gameList.get(i);
 			}
 		}
