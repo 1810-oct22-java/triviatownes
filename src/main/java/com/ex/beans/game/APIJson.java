@@ -2,7 +2,9 @@ package com.ex.beans.game;
 
 import java.util.Arrays;
 
-public class ObjectJSON {
+import org.springframework.stereotype.Component;
+
+public class APIJson {
 	
 	private String response_code;
 	//private Results[] results;
