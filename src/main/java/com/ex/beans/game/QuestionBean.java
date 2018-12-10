@@ -1,65 +1,87 @@
 package com.ex.beans.game;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Vector;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class QuestionBean {
 	
-	private String category;
-	private String type;
-	private String difficulty;
-	private String question;
-	private String correct_answer;
-	private String[] incorrect_answers;
+	private boolean isMultipleChoice; 
+	private StringBuffer category;
+	private StringBuffer difficulty;
+	private StringBuffer question;
+	private int correctIndex;
+	private Vector<StringBuffer> answers;
 	
-	public String getCategory() {
+	QuestionBean(){
+		answers = new Vector<StringBuffer>();
+	}
+	
+	public void randomizeAnswers() {
+		Collections.shuffle(answers);
+	}
+
+	public boolean isMultipleChoice() {
+		return isMultipleChoice;
+	}
+
+	public void setMultipleChoice(boolean isMultipleChoice) {
+		this.isMultipleChoice = isMultipleChoice;
+	}
+
+	public StringBuffer getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+
+	public void setCategory(StringBuffer category) {
 		this.category = category;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getDifficulty() {
+
+	public StringBuffer getDifficulty() {
 		return difficulty;
 	}
-	public void setDifficulty(String difficulty) {
+
+	public void setDifficulty(StringBuffer difficulty) {
 		this.difficulty = difficulty;
 	}
-	public String getQuestion() {
+
+	public StringBuffer getQuestion() {
 		return question;
 	}
-	public void setQuestion(String question) {
+
+	public void setQuestion(StringBuffer question) {
 		this.question = question;
 	}
-	public String getCorrect_answer() {
-		return correct_answer;
+
+	public int getCorrectIndex() {
+		return correctIndex;
 	}
-	public void setCorrect_answer(String correct_answer) {
-		this.correct_answer = correct_answer;
+
+	public void setCorrectIndex(int correctIndex) {
+		this.correctIndex = correctIndex;
 	}
-	public String[] getIncorrect_answers() {
-		return incorrect_answers;
+
+	public Vector<StringBuffer> getAnswers() {
+		return answers;
 	}
-	public void setIncorrect_answers(String[] incorrect_answers) {
-		this.incorrect_answers = incorrect_answers;
+
+	public void setAnswers(Vector<StringBuffer> answers) {
+		this.answers = answers;
 	}
+	
+	public void addAnswer(StringBuffer a) {
+		this.answers.add(a);
+	}
+
 	@Override
 	public String toString() {
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("\n--------Question JSON--------\n");
-		sb.append("Category: " + getCategory() + "\n");
-		sb.append("Type: " + getType() + "\n");
-		sb.append("Difficulty: " + getDifficulty() + "\n");
-		sb.append("Question: " + getQuestion() + "\n");
-		sb.append("Correct answer: " + getCorrect_answer() + "\n");
-		sb.append("Incorrect answer: " + Arrays.toString(getIncorrect_answers()) + "\n");
-		return sb.toString();
+		return "QuestionBean [isMultipleChoice=" + isMultipleChoice + ", category=" + category + ", difficulty="
+				+ difficulty + ", question=" + question + ", correctIndex=" + correctIndex + ", answers=" + answers
+				+ "]";
 	}
-
+	
 
 }
+
