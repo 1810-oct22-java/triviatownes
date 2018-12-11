@@ -1,6 +1,13 @@
 package com.ex.beans.game;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+
 public class LeaderboardBean {
+	
 	private String name;
 	private int score;
 	
