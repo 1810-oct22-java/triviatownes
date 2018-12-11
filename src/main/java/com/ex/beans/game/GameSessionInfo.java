@@ -8,7 +8,29 @@ public class GameSessionInfo {
 	private StringBuffer name;
 	private StringBuffer scope;
 	private StringBuffer difficulty;
+	private StringBuffer key;
 	
+	public GameSessionInfo() {
+		
+	}
+	
+	public GameSessionInfo(GameSessionBean game) {
+		super();
+		this.category = game.getCategory();
+		this.players = game.getCurrentPlayers().size();
+		this.maxPlayers = game.getMaxPlayers();
+		this.name = game.getName();
+		this.scope = game.getScope();
+		this.difficulty = game.getDifficulty();
+		this.key = game.getJoinKey();
+	}
+	
+	public StringBuffer getKey() {
+		return key;
+	}
+	public void setKey(StringBuffer key) {
+		this.key = key;
+	}
 	public synchronized StringBuffer getDifficulty() {
 		return difficulty;
 	}

@@ -15,6 +15,8 @@ public class GameSessionBean {
 	
 	StringBuffer joinKey;
 	
+	public int numberOfQuestions;
+	
 	public StringBuffer getJoinKey() {
 		return joinKey;
 	}
@@ -51,6 +53,12 @@ public class GameSessionBean {
 	
 	StringBuffer scope;
 	
+	public synchronized void loadQuestions() {
+		
+		return;
+		
+	}
+	
 	public synchronized Boolean hasPlayers() {
 		if(this.currentPlayers == null) return false;
 		return true;
@@ -65,6 +73,10 @@ public class GameSessionBean {
 			temp.setUsername(new StringBuffer("Test " + i));
 			this.currentPlayers.add(temp);
 		}
+	}
+	
+	public synchronized void addPlayer(PlayerBean p) {
+		this.currentPlayers.add(p);
 	}
 	
 	public synchronized int getInstanceId() {
@@ -171,6 +183,12 @@ public class GameSessionBean {
 		temp.setUsername(new StringBuffer("Added" + count));
 		count++;
 		this.currentPlayers.add(temp);
+	}
+	
+	public GameSessionBean() {
+		
+		this.currentPlayers = new ArrayList<PlayerBean>();
+		
 	}
 	
 	public static int count = 1;

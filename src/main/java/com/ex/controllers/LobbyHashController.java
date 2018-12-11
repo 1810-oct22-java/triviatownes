@@ -29,11 +29,11 @@ public class LobbyHashController {
 	
 	private static Logger logger = Logger.getLogger(NewUserController.class);
 	
-	@MessageMapping("{gameId}/get-game-data")
-	@SendTo("/send-game-update/{gameId}/get-game-data")
+	@MessageMapping("{gameKey}/get-game-data")
+	@SendTo("/send-game-update/{gameKey}/get-game-data")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public int connect3(@DestinationVariable String gameId,SimpMessageHeaderAccessor headerAccessor) {
+	public GameSessionInfo connect3(@DestinationVariable String gameKey,SimpMessageHeaderAccessor headerAccessor) {
 		
 		GameManagerService gm = GameManagerService.getInstance();
 		
@@ -48,12 +48,9 @@ public class LobbyHashController {
 			logger.trace("we should be good");
 		}
 		
-		GameSessionBean game = gm.getGameByKey(new StringBuffer(gameId));
+		GameSessionBean game = gm.getGameByKey(new StringBuffer(gameKey));
 		
-		//logger.trace(headerAccessor.getHeader(headerName));
-		
-		return 5;
-		
+		return new GameSessionInfo(game);
 	}
 	
 	@MessageMapping("{category}/get-lobby-data")
@@ -108,8 +105,8 @@ public class LobbyHashController {
 		
 		logger.trace(game);
 		
-		game.addDumbyData();
-		logger.trace("Is this it");
+		//game.addDumbyData();
+		//logger.trace("Is this it");
 		
 		game.addDummyPlayer();
 		

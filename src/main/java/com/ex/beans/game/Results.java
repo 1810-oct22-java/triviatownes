@@ -49,7 +49,7 @@ public class Results {
 	@Override
 	public String toString() {
 		
-		StringBuilder sb = new StringBuilder();
+		StringBuffer sb = new StringBuffer();
 		sb.append("\n--------Question JSON--------\n");
 		sb.append("Category: " + getCategory() + "\n");
 		sb.append("Type: " + getType() + "\n");
