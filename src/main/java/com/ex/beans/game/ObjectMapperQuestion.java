@@ -14,7 +14,7 @@ public class ObjectMapperQuestion {
 	//Turn JSON into question arrayList 
 	public static void main(String[] args) {
 		
-		getQuestions(10, "All", "easy");
+		getQuestions(10, "All");
 	}
 	
 	
@@ -25,7 +25,7 @@ public class ObjectMapperQuestion {
 	 * @param difficulty
 	 * @return List of QuestionBeans to be used by the Game Session
 	 */
-	public static  List<QuestionBean> getQuestions(int numOfQuestions, String category, String difficulty) {	
+	public static  List<QuestionBean> getQuestions(int numOfQuestions, String category) {	
 		// Will populate list with questions fetched from the API
 		List<QuestionBean> questionList = new ArrayList<QuestionBean>();
 		
@@ -34,11 +34,10 @@ public class ObjectMapperQuestion {
 			String urlString;
 			int categoryNumber = convertCategoryToInt(category);		
 			if(categoryNumber == 0) {	// Corresponds to "any" category
-				urlString = "https://opentdb.com/api.php?amount=" + numOfQuestions 
-						+ "&difficulty=" + difficulty;
+				urlString = "https://opentdb.com/api.php?amount=" + numOfQuestions;
 			} else {
 				urlString = "https://opentdb.com/api.php?amount=" + numOfQuestions 
-						+ "&category=" + categoryNumber + "&difficulty=" + difficulty;
+						+ "&category=" + categoryNumber;
 			}
 			
 			// Retrieve JSON string from API and map it to a "data transfer object"
