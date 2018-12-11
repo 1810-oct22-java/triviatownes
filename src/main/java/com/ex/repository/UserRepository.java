@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<HighScoreBean, Integer> {
 	//public List<HighScoreBean> oddQuery();
 
 	public List<HighScoreBean> findAll();
+	
+	
+	public HighScoreBean save();
 }

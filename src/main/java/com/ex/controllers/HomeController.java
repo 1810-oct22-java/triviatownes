@@ -58,8 +58,8 @@ hsb.setUsername("John");
 hsb.setScore(12);
 hsb.setMaxStreak(6);
 hsb.setRightAnswers(12);
-		repo.save(hsb);
-		*/
+		repo.save(hsb);*/
+		
 		
 		return "Welcome to Spring!";
 		
