@@ -14,15 +14,10 @@ public class ObjectMapperQuestion {
 	public static void main(String[] args) {
 		
 		getQuestions(10, "All");
+		
 	}
 	
-	
-	/**
-	 * 
-	 * @param numOfQuestions
-	 * @param category
-	 * @return List of QuestionBeans to be used by the Game Session
-	 */
+
 	public static  List<QuestionBean> getQuestions(int numOfQuestions, String category) {	
 		// Will populate list with questions fetched from the API
 		List<QuestionBean> questionList = new ArrayList<QuestionBean>();
@@ -71,7 +66,8 @@ public class ObjectMapperQuestion {
 	}
 
 	// Convert category string name to its corresponding category number according to the API
-	public static int convertCategoryToInt(String category) {	
+	public static int convertCategoryToInt(String category) {
+		
 		switch(category) {
 		case "Geography": return 22;
 		case "History": return 23;
