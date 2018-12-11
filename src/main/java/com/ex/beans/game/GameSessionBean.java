@@ -2,7 +2,6 @@ package com.ex.beans.game;
 
 import java.util.ArrayList;
 
-import com.ex.interfaces.game.QuestionInterface;
 
 public class GameSessionBean {
 	
@@ -169,12 +168,12 @@ public class GameSessionBean {
 	}
 
 
-	public synchronized ArrayList<QuestionInterface> getQuestions() {
+	public synchronized ArrayList<QuestionBean> getQuestions() {
 		return Questions;
 	}
 
 
-	public synchronized void setQuestions(ArrayList<QuestionInterface> questions) {
+	public synchronized void setQuestions(ArrayList<QuestionBean> questions) {
 		Questions = questions;
 	}
 	
@@ -207,6 +206,6 @@ public class GameSessionBean {
 	 * This is a serializable 
 	 * 
 	 * */
-	ArrayList<QuestionInterface> Questions;
+	ArrayList<QuestionBean> Questions;
 	
 }
