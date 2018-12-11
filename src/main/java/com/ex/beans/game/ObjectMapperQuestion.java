@@ -13,7 +13,7 @@ public class ObjectMapperQuestion {
 	//Turn JSON into question arrayList 
 	public static void main(String[] args) {
 		
-		getQuestions(10, "All", "easy");
+		getQuestions(1, "All", "easy");
 	}
 	
 	
