@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ObjectMapperQuestion {
@@ -22,7 +21,6 @@ public class ObjectMapperQuestion {
 	 * 
 	 * @param numOfQuestions
 	 * @param category
-	 * @param difficulty
 	 * @return List of QuestionBeans to be used by the Game Session
 	 */
 	public static  List<QuestionBean> getQuestions(int numOfQuestions, String category) {	
