@@ -8,7 +8,7 @@ public class APIJson {
 	
 	private String response_code;
 	//private Results[] results;
-	private QuestionBean[] results;
+	private QuestionJson[] results;
 	
 	public String getResponse_code() {
 		return response_code;
@@ -16,10 +16,10 @@ public class APIJson {
 	public void setResponse_code(String response_code) {
 		this.response_code = response_code;
 	}
-	public QuestionBean[] getResults() {
+	public QuestionJson[] getResults() {
 		return results;
 	}
-	public void setResults(QuestionBean[] results) {
+	public void setResults(QuestionJson[] results) {
 		this.results = results;
 	}
 	@Override

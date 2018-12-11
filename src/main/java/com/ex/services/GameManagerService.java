@@ -62,6 +62,8 @@ public class GameManagerService {
 	
 	synchronized public void makeDummyList() {
 		
+		int count = 0;
+		
 		for(int i = 0; i < 5; i ++) {
 			int tempId = createGame();
 			getGame(tempId).setCategory(new StringBuffer("art"));
@@ -82,6 +84,9 @@ public class GameManagerService {
 			getGame(tempId).setDifficulty(new StringBuffer("hard"));
 			
 			getGame(tempId).setInstanceId(tempId);
+			
+			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
+			count  = count + 1;
 		}
 		
 		for(int i = 0; i < 5; i ++) {
@@ -104,6 +109,9 @@ public class GameManagerService {
 			getGame(tempId).setDifficulty(new StringBuffer("easy"));
 			
 			getGame(tempId).setInstanceId(tempId);
+			
+			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
+			count  = count + 1;
 		}
 		
 		logger.trace("List is filled with " + gameList.size() + " games");
@@ -140,5 +148,17 @@ public class GameManagerService {
 		}
 		
 		return serverList;
+	}
+	
+	synchronized public GameSessionBean getGameByKey(StringBuffer key) {
+		
+		for(int i = 0; i < this.gameList.size(); i++) {
+			
+			if(gameList.get(i).getJoinKey().toString().equals(key.toString())) {
+				return gameList.get(i);
+			}
+		}
+		
+		return null;
 	}
 }

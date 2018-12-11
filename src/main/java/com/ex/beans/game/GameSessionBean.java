@@ -2,7 +2,6 @@ package com.ex.beans.game;
 
 import java.util.ArrayList;
 
-import com.ex.interfaces.game.QuestionInterface;
 
 public class GameSessionBean {
 	
@@ -13,12 +12,24 @@ public class GameSessionBean {
 	* */
 	int instanceId;
 	
+	StringBuffer joinKey;
+	
+	public StringBuffer getJoinKey() {
+		return joinKey;
+	}
+
+
+	public void setJoinKey(StringBuffer joinKey) {
+		this.joinKey = joinKey;
+	}
+
+
 	/*
 	 * Is used to easily get the current instance state
 	 * 0 = waiting, 1 = playing, 2 = game-end, 3 = finished
 	 * StringBuffer is used because it must be thread safe
 	 * */
-	StringBuffer state;
+	int state;
 	
 	/*
 	 * This is used to track the global message system
@@ -39,6 +50,22 @@ public class GameSessionBean {
 	
 	StringBuffer scope;
 	
+	public synchronized Boolean hasPlayers() {
+		if(this.currentPlayers == null) return false;
+		return true;
+	}
+	
+	public synchronized void addDumbyData(){
+		if(this.hasPlayers()) return;
+		this.currentPlayers = new ArrayList<PlayerBean>();
+		
+		for(int i = 0; i < 5; i ++) {
+			PlayerBean temp = new PlayerBean();
+			temp.setUsername(new StringBuffer("Test " + i));
+			this.currentPlayers.add(temp);
+		}
+	}
+	
 	public synchronized int getInstanceId() {
 		return instanceId;
 	}
@@ -49,12 +76,12 @@ public class GameSessionBean {
 	}
 
 
-	public synchronized StringBuffer getState() {
+	public synchronized int getState() {
 		return state;
 	}
 
 
-	public synchronized void setState(StringBuffer state) {
+	public synchronized void setState(int state) {
 		this.state = state;
 	}
 
@@ -129,21 +156,30 @@ public class GameSessionBean {
 	}
 
 
-	public synchronized ArrayList<QuestionInterface> getQuestions() {
+	public synchronized ArrayList<QuestionBean> getQuestions() {
 		return Questions;
 	}
 
 
-	public synchronized void setQuestions(ArrayList<QuestionInterface> questions) {
+	public synchronized void setQuestions(ArrayList<QuestionBean> questions) {
 		Questions = questions;
 	}
+	
+	public synchronized void addDummyPlayer() {
+		PlayerBean temp = new PlayerBean();
+		temp.setUsername(new StringBuffer("Added" + count));
+		count++;
+		this.currentPlayers.add(temp);
+	}
+	
+	public static int count = 1;
 
 
 	/*
 	 * This is a serializable list of currentPlayers
 	 * 
 	 * */
-	ArrayList<PlayerBean> currentPlayers;
+	public ArrayList<PlayerBean> currentPlayers;
 	
 	int maxPlayers;
 	
@@ -152,6 +188,6 @@ public class GameSessionBean {
 	 * This is a serializable 
 	 * 
 	 * */
-	ArrayList<QuestionInterface> Questions;
+	ArrayList<QuestionBean> Questions;
 	
 }

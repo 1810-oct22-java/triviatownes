@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/game")
+@RequestMapping(value="/no")
 public class GameController {
 	
 	@RequestMapping(method=RequestMethod.GET)

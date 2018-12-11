@@ -12,6 +12,10 @@ public class MultipleChoiceQuestionBean{
 	private String question;
 	private String[] answers;
 	
+	public MultipleChoiceQuestionBean() {
+		
+	};
+	
 	public MultipleChoiceQuestionBean(String category, String difficulty, String question, String[] answers) {
 		super();
 		this.category = category;
