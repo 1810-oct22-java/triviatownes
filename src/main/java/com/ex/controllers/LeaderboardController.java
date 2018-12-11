@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ex.beans.game.LeaderboardBean;
-import com.ex.services.LeaderboardService;
+import com.ex.services.LeaderBoardService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -20,7 +19,7 @@ public class LeaderboardController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method=RequestMethod.GET)
 	public List<LeaderboardBean> getAll() {
-		LeaderboardService ls = new LeaderboardService();
+		LeaderBoardService ls = new LeaderBoardService();
 		return ls.getAll();
 	}
 }

@@ -6,12 +6,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class ConnectionFactory {
 	
-	private static ConnectionFactory cf = null;
+/*	private static ConnectionFactory cf = null;
 	private static Logger logger = Logger.getLogger(ConnectionFactory.class);
 	
 	public static synchronized ConnectionFactory getInstance() {
@@ -26,7 +25,7 @@ public class ConnectionFactory {
 	 * - has information about DB tables, stored procedures, and 
 	 * all other related db objects. 
 	 */
-	
+	/*
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
@@ -38,14 +37,14 @@ public class ConnectionFactory {
 				//the following line of code uses reflection and the 
 				// .properties file in order to instantiate our driver
 				//  class listed in the file
-				Class.forName(prop.getProperty("driver"));
+				Class.forName(prop.getProperty("driver"));*/
 				/*
 				 * The DriverManager provides a basic service for 
 				 * managing a set of JDBC drivers. As part of its 
 				 * initialization, the DriverManager class will 
 				 * attempt to load the driver class referenced previously
 				 */
-				conn = DriverManager.getConnection(
+		/*		conn = DriverManager.getConnection(
 						prop.getProperty("url"), 
 						prop.getProperty("usr"), 
 						prop.getProperty("pwd"));
@@ -57,5 +56,5 @@ public class ConnectionFactory {
 				e.printStackTrace();
 			}
 		return conn;
-	}
+	}*/
 }

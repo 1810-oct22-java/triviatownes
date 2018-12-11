@@ -5,7 +5,10 @@ import java.util.List;
 
 import com.ex.beans.game.LeaderboardBean;
 
-public class LeaderboardService {
+
+
+
+public class LeaderBoardService {
 	
 	//dummy data for leaderboards until we get the database connected
 	static ArrayList<LeaderboardBean> leaders = new ArrayList<LeaderboardBean>();
