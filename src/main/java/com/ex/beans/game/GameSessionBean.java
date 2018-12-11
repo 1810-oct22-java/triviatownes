@@ -190,7 +190,7 @@ public class GameSessionBean {
 		
 	}
 	
-	public static int count = 1;
+	public int count = 1;
 
 
 	/*

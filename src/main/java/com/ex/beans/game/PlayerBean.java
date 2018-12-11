@@ -5,6 +5,16 @@ public class PlayerBean {
 	//Thread safe username
 	private StringBuffer username;
 	
+	private int playerId;
+	
+	public synchronized int getPlayerId() {
+		return playerId;
+	}
+
+	public synchronized void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
+
 	//0 = a, 1 = b, 2 = c, 3 = d
 	private int currentAnswer;
 	

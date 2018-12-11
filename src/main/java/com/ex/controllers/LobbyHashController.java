@@ -88,19 +88,8 @@ public class LobbyHashController {
 		
 		GameManagerService gm = GameManagerService.getInstance();
 		
-		if(gm.gameList.size() == 0) {
-			logger.trace("Adding game key");
-			int gameIndex = gm.createGame();
-			gm.getGame(gameIndex).setJoinKey(new StringBuffer("abc"));
-		} else if(gm.getGameByKey(new StringBuffer("abc")) == null) {
-			int gameIndex = gm.createGame();
-			gm.getGame(gameIndex).setJoinKey(new StringBuffer("abc"));
-		} else {
-			logger.trace("we should be good");
-		}
-		
 		logger.trace("Before Error");
-		GameSessionBean game = gm.getGameByKey(new StringBuffer("abc"));
+		GameSessionBean game = gm.getGameByKey(new StringBuffer("0"));
 		logger.trace("After Error");
 		
 		logger.trace(game);
@@ -108,7 +97,7 @@ public class LobbyHashController {
 		//game.addDumbyData();
 		//logger.trace("Is this it");
 		
-		game.addDummyPlayer();
+		//game.addDummyPlayer();
 		
 		ArrayList<PlayerBean> playerList = game.getCurrentPlayers();
 		WaitingMessage wm = new WaitingMessage();

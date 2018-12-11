@@ -14,7 +14,13 @@ public class ObjectMapperQuestion {
 	//Turn JSON into question arrayList 
 	public static void main(String[] args) {
 		
-		getQuestions(10, "All", "easy");
+		//System.out.println(convertCategoryToInt("Art"));
+		
+		ArrayList<QuestionBean> test = getQuestions(5, "Geography", "easy");
+		
+		for(int i = 0; i < test.size(); i++) {
+			System.out.println(test.get(i));
+		}
 	}
 	
 	
@@ -25,9 +31,9 @@ public class ObjectMapperQuestion {
 	 * @param difficulty
 	 * @return List of QuestionBeans to be used by the Game Session
 	 */
-	public static  List<QuestionBean> getQuestions(int numOfQuestions, String category, String difficulty) {	
+	public static  ArrayList<QuestionBean> getQuestions(int numOfQuestions, String category, String difficulty) {	
 		// Will populate list with questions fetched from the API
-		List<QuestionBean> questionList = new ArrayList<QuestionBean>();
+		ArrayList<QuestionBean> questionList = new ArrayList<QuestionBean>();
 		
 		try {
 			// Generate URL to fetch questions from API
@@ -39,6 +45,7 @@ public class ObjectMapperQuestion {
 			} else {
 				urlString = "https://opentdb.com/api.php?amount=" + numOfQuestions 
 						+ "&category=" + categoryNumber + "&difficulty=" + difficulty;
+				System.out.println(urlString);
 			}
 			
 			// Retrieve JSON string from API and map it to a "data transfer object"
@@ -52,7 +59,7 @@ public class ObjectMapperQuestion {
 				QuestionBean qb = createQuestionBean(q);
 				questionList.add(qb);
 			}		
-			System.out.println(questionList);		
+			//System.out.println(questionList);		
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}	
@@ -96,7 +103,7 @@ public class ObjectMapperQuestion {
 	 */
 	public static QuestionBean createQuestionBean(QuestionJson qj) {
 		QuestionBean question = new QuestionBean();
-		question.setCategory(new StringBuffer(qj.getCategory()));
+		question.setCategory(new StringBuffer(qj.getCategory().toLowerCase()));
 		if (qj.getType().equals("multiple")) {
 			question.setMultipleChoice(true);
 		}
