@@ -20,7 +20,7 @@ public class ObjectMapperQuestion {
 
 	public static  List<QuestionBean> getQuestions(int numOfQuestions, String category) {	
 		// Will populate list with questions fetched from the API
-		List<QuestionBean> questionList = new ArrayList<QuestionBean>();
+		ArrayList<QuestionBean> questionList = new ArrayList<QuestionBean>();
 		
 		try {
 			// Generate URL to fetch questions from API
@@ -44,7 +44,7 @@ public class ObjectMapperQuestion {
 				QuestionBean qb = createQuestionBean(q);
 				questionList.add(qb);
 			}		
-			System.out.println(questionList);		
+			//System.out.println(questionList);		
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}	
@@ -89,7 +89,7 @@ public class ObjectMapperQuestion {
 	 */
 	public static QuestionBean createQuestionBean(QuestionJson qj) {
 		QuestionBean question = new QuestionBean();
-		question.setCategory(new StringBuffer(qj.getCategory()));
+		question.setCategory(new StringBuffer(qj.getCategory().toLowerCase()));
 		if (qj.getType().equals("multiple")) {
 			question.setMultipleChoice(true);
 		}

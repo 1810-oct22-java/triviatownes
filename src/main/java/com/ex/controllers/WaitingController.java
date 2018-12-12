@@ -18,7 +18,7 @@ import com.ex.services.GameManagerService;
 
 @Controller
 @CrossOrigin(origins = "*")
-@MessageMapping("/hello")
+@MessageMapping("/waiting-update")
 public class WaitingController {
 	
 	private static Logger logger = Logger.getLogger(WaitingController.class);
@@ -31,24 +31,20 @@ public class WaitingController {
 	@ResponseBody
 	public WaitingMessage connect(@DestinationVariable String lobbyId,SimpMessageHeaderAccessor headerAccessor) {
 		
+		logger.trace("Updating");
+		
 		GameManagerService gm = GameManagerService.getInstance();
 		
-		if(gm.gameList.size() == 0) {
-			logger.trace("Adding game key");
-			int gameIndex = gm.createGame();
-			gm.getGame(gameIndex).setJoinKey(new StringBuffer("abc"));
-		}
+		logger.trace(gm.gameList.size());
 		
-		logger.trace("Before Error");
-		GameSessionBean game = gm.getGameByKey(new StringBuffer("abc"));
-		logger.trace("After Error");
+		GameSessionBean game = gm.getGameByKey(new StringBuffer(lobbyId));
 		
 		logger.trace(game);
 		
-		game.addDumbyData();
+		//game.addDumbyData();
 		logger.trace("Is this it");
 		
-		game.addDummyPlayer();
+		//game.addDummyPlayer();
 		
 		ArrayList<PlayerBean> playerList = game.getCurrentPlayers();
 		WaitingMessage wm = new WaitingMessage();

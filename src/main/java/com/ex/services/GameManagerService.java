@@ -45,13 +45,18 @@ public class GameManagerService {
 	
 	synchronized public int createGame() {
 		
+		GameSessionBean temp = new GameSessionBean();
+		
 		for(int i = 0; i < gameList.size(); i++) {
 			if(gameList.get(i) == null) {
-				gameList.add(i, new GameSessionBean());
+				temp.setInstanceId(i);
+				gameList.add(temp);
 				return i;
 			}
 		}
-		gameList.add(new GameSessionBean());
+		
+		temp.setInstanceId(gameList.size());
+		gameList.add(temp);
 		return gameList.size() - 1;
 		
 	}
@@ -85,6 +90,8 @@ public class GameManagerService {
 			
 			getGame(tempId).setInstanceId(tempId);
 			
+			getGame(tempId).setJoinKey(new StringBuffer(count * 5 + "hello"));
+			
 			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
 			count  = count + 1;
 		}
@@ -110,6 +117,8 @@ public class GameManagerService {
 			
 			getGame(tempId).setInstanceId(tempId);
 			
+			getGame(tempId).setJoinKey(new StringBuffer(count * 5 + "hello"));
+			
 			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
 			count  = count + 1;
 		}
@@ -132,7 +141,7 @@ public class GameManagerService {
 			
 			if(gameList.get(i) == null) continue;
 			
-			if(category.equals("") || category.equals(gameList.get(i).getCategory().toString().toLowerCase())) {
+			if(category.equals("all") || category.equals(gameList.get(i).getCategory().toString().toLowerCase())) {
 			
 				GameSessionInfo temp = new GameSessionInfo();
 				
@@ -142,6 +151,7 @@ public class GameManagerService {
 				temp.setPlayers(gameList.get(i).getCurrentPlayers().size());
 				temp.setMaxPlayers(gameList.get(i).getMaxPlayers());
 				temp.setScope(gameList.get(i).getScope());
+				temp.setKey(gameList.get(i).getJoinKey());
 				
 				serverList.add(temp);
 			}

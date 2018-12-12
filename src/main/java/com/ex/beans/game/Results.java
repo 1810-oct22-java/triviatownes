@@ -2,7 +2,7 @@ package com.ex.beans.game;
 
 import java.util.Arrays;
 
-public class QuestionJson {
+public class Results {
 	
 	private String category;
 	private String type;
@@ -10,7 +10,6 @@ public class QuestionJson {
 	private String question;
 	private String correct_answer;
 	private String[] incorrect_answers;
-	
 	public String getCategory() {
 		return category;
 	}
@@ -50,7 +49,7 @@ public class QuestionJson {
 	@Override
 	public String toString() {
 		
-		StringBuilder sb = new StringBuilder();
+		StringBuffer sb = new StringBuffer();
 		sb.append("\n--------Question JSON--------\n");
 		sb.append("Category: " + getCategory() + "\n");
 		sb.append("Type: " + getType() + "\n");
@@ -60,6 +59,5 @@ public class QuestionJson {
 		sb.append("Incorrect answer: " + Arrays.toString(getIncorrect_answers()) + "\n");
 		return sb.toString();
 	}
-
 
 }
