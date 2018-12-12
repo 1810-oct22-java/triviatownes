@@ -35,23 +35,23 @@ public class LobbyHashController {
 	@ResponseBody
 	public GameSessionInfo connect3(@DestinationVariable String gameKey,SimpMessageHeaderAccessor headerAccessor) {
 		
+		//Game Manager Service
 		GameManagerService gm = GameManagerService.getInstance();
 		
-		if(gm.gameList.size() == 0) {
-			logger.trace("Adding game key");
-			int gameIndex = gm.createGame();
-			gm.getGame(gameIndex).setJoinKey(new StringBuffer("abc"));
-		} else if(gm.getGameByKey(new StringBuffer("abc")) == null) {
-			int gameIndex = gm.createGame();
-			gm.getGame(gameIndex).setJoinKey(new StringBuffer("abc"));
-		} else {
-			logger.trace("we should be good");
-		}
-		
+		//Get Game Session Wtih Key
 		GameSessionBean game = gm.getGameByKey(new StringBuffer(gameKey));
+		
+		//Store the top three scores
+		ArrayList<PlayerBean> topPlayers = new ArrayList<PlayerBean>();
+		game.getTopThreePlayers();
+		topPlayers.add(game.getCurrentPlayers().get(0));
+		topPlayers.add(game.getCurrentPlayers().get(1));
+		topPlayers.add(game.getCurrentPlayers().get(2));
 		
 		return new GameSessionInfo(game);
 	}
+	
+	
 	
 	@MessageMapping("{category}/get-lobby-data")
 	@SendTo("/lobbies-hash/{category}/get-lobby-data")
@@ -89,7 +89,7 @@ public class LobbyHashController {
 		GameManagerService gm = GameManagerService.getInstance();
 		
 		logger.trace("Before Error");
-		GameSessionBean game = gm.getGameByKey(new StringBuffer("0"));
+		GameSessionBean game = gm.getGameByKey(new StringBuffer(lobbyId));
 		logger.trace("After Error");
 		
 		logger.trace(game);

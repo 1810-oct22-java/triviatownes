@@ -45,6 +45,7 @@ public class JoinLobbyController {
 		if(game.currentPlayers.size() == game.getMaxPlayers()) {
 			message.setHasError(1);
 			message.setError(new StringBuffer("lobby is full"));
+			resp.setStatus(HttpServletResponse.SC_CONFLICT);
 		} else {
 			PlayerBean newPlayer = new PlayerBean();
 			game.count = game.count + 1;
@@ -54,9 +55,12 @@ public class JoinLobbyController {
 			
 			message.setUserId(newPlayer.getPlayerId());
 			message.setLobbyId(game.getJoinKey());
+	        message.setCategory(game.getCategory());
+	        message.setLobbyName(game.getName());
+	        message.setQuestions(game.numberOfQuestions);
+	        
 		}
-		logger.trace(gm.gameList.size());
+
 		return message;
 	}
-
 }

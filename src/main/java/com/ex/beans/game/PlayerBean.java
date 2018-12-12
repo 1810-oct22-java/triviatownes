@@ -28,6 +28,16 @@ public class PlayerBean {
 	private int rightAnswers;
 	
 	private int wrongAnswers;
+	
+	public synchronized int getCurrentStreak() {
+		return currentStreak;
+	}
+
+	public synchronized void setCurrentStreak(int currentStreak) {
+		this.currentStreak = currentStreak;
+	}
+
+	private int currentStreak;
 
 	public synchronized StringBuffer getUsername() {
 		return username;
