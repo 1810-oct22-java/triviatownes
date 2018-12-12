@@ -5,34 +5,42 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
-import com.ex.beans.game.HighScoreBean;
-import com.ex.beans.game.PlayerBean;
-import com.ex.repository.UserRepository;
+import com.ex.beans.game.HighScorePlayerBean;
+import com.ex.repository.HighScoreBeanRepository;
+
+
 
 @Component
 public class App {
-
-	@Autowired
-	private static UserRepository repo;
 	
+	@Autowired
+	private static HighScoreBeanRepository repo;
+	
+	
+
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-		UserRepository repo = (UserRepository) context.getBean(UserRepository.class);
+		HighScoreBeanRepository repo = (HighScoreBeanRepository) context.getBean(HighScoreBeanRepository.class);
 		
-		List<HighScoreBean> u = repo.findAll();
+		
+	
+		HighScorePlayerBean hspb = new HighScorePlayerBean();
+
+		hspb.setUsername("John");
+		hspb.setScore(10);
+		hspb.setMaxStreak(10);
+		hspb.setRightAnswers(10);
+	
+		repo.save(hspb);
+		
+		List<HighScorePlayerBean> u = repo.findAll();
 		System.out.println(u);
+	
 		
-		//repo.Save("bill", 10, 15, 15);
-		//repo.Save("NULL","Bill", 10, 12, 12);
-		HighScoreBean hsb = new HighScoreBean();
-//hsb.setId(1);
-hsb.setUsername("John");
-hsb.setScore(12);
-hsb.setMaxStreak(6);
-hsb.setRightAnswers(12);
-		repo.save(hsb);
+		
 		
 		
 	}

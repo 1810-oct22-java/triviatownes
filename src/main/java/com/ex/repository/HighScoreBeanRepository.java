@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.ex.beans.Dual;
-import com.ex.beans.HighScorePlayerBean;
+import com.ex.beans.game.Dual;
+import com.ex.beans.game.HighScorePlayerBean;
 
 
 

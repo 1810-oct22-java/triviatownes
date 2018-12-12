@@ -1,4 +1,4 @@
-package com.ex.beans;
+package com.ex.beans.game;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
