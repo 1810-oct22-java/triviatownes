@@ -18,5 +18,7 @@ public class LeaderboardService {
 		return repo.findAll();
 	}
 	
-	
+	public HighScorePlayerBean save(HighScorePlayerBean persisted) {
+		return repo.save(persisted);
+	}
 }

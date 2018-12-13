@@ -22,4 +22,5 @@ public class LeaderboardController {
 		LeaderboardService ls = new LeaderboardService();
 		return ls.getAll();
 	}
+	
 }
