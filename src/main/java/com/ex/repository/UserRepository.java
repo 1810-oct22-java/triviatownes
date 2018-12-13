@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<HighScorePlayerBean, Integ
 
 	public List<HighScorePlayerBean> findAll();
 	
+	public HighScorePlayerBean save(HighScorePlayerBean persisted);
+	
 }
