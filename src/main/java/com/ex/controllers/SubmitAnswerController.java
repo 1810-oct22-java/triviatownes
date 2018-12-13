@@ -21,7 +21,7 @@ public class SubmitAnswerController {
 	
 	private static Logger logger = Logger.getLogger(NewUserController.class);
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	@CrossOrigin(origins = "*")
 	public int submitAnswer(HttpServletRequest req, HttpServletResponse resp) {
@@ -40,13 +40,15 @@ public class SubmitAnswerController {
 		player.setScore(player.getScore() + points);
 		
 		//If player answered the question right
-		if(player.getScore() != 0) {
+		if(points != 0) {
+			player.setRightAnswers(player.getRightAnswers() + 1);
 			player.setCurrentStreak(player.getCurrentStreak() + 1);
 			if(player.getMaxStreak() < player.getCurrentStreak()) {
 				player.setMaxStreak(player.getCurrentStreak());
 			}
 		//If player answered the question wrong
 		} else {
+			player.setWrongAnswers(player.getWrongAnswers() + 1);
 			player.setCurrentStreak(0);
 		}
 		

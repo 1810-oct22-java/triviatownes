@@ -42,7 +42,7 @@ public class GameSessionBean {
 	
 	StringBuffer scope;
 	
-	long roundTime = 5;
+	long roundTime = 20;
 	
 	public int count = 0;
 
@@ -89,6 +89,8 @@ public class GameSessionBean {
 			
 			//If game is over
 			if(this.Questions.size() == this.currentQuestionIndex + 1) {
+				
+				logger.trace("LOOK FOR ME");
 				
 				//End game state
 				this.state = 2;
@@ -228,7 +230,7 @@ public class GameSessionBean {
 	public static Comparator<PlayerBean> sortByPointsComparator = new Comparator<PlayerBean>() {         
 	    @Override         
 	    public int compare(PlayerBean player1, PlayerBean player2) {             
-	      return (player1.getScore() < player1.getScore() ? -1 :                     
+	      return (player1.getScore() > player1.getScore() ? -1 :                     
 	              (player1.getScore() == player1.getScore() ? 0 : 1));           
 	    }     
 	 };
