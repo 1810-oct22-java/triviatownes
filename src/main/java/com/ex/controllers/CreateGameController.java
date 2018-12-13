@@ -2,6 +2,7 @@ package com.ex.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
@@ -44,9 +45,13 @@ public class CreateGameController {
         
         PlayerBean player = new PlayerBean();
         
+        HttpSession session = req.getSession();
+        session.setAttribute("playerId", gs.count);
+        session.setAttribute("lobbyId", count + "");
+        
+        gs.count = gs.count + 1;
         player.setUsername(username);
         player.setPlayerId(gs.count);
-        gs.count = gs.count + 1;
         
         gs.addPlayer(player);
         

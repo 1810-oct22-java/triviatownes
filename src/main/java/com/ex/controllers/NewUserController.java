@@ -21,12 +21,6 @@ import com.ex.services.GameManagerService;
 @CrossOrigin(origins = "*")
 public class NewUserController {
 	
-	@Autowired
-	HttpServletRequest req;
-	
-	@Autowired
-	HttpServletResponse resp;
-	
 	// This creates the "VERBOSE" level if it does not exist yet.
 	final Level VERBOSE = Level.toLevel("VERBOSE");
 	
@@ -35,7 +29,7 @@ public class NewUserController {
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	@CrossOrigin(origins = "*")
-	public HttpServletResponse newUser() {
+	public HttpServletResponse newUser(HttpServletResponse resp, HttpServletRequest req) {
 		
 		logger.trace("Hello");
 		

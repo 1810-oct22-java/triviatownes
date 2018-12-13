@@ -267,6 +267,17 @@ public class GameSessionBean {
 		}
 	}
 	
+	public synchronized void removeUser(int key) {
+		
+		for(int i = 0; i < this.getCurrentPlayers().size(); i++) {
+			
+			if(this.getCurrentPlayers().get(i).getPlayerId() == key){
+				this.getCurrentPlayers().remove(i);
+				this.getCurrentPlayers().trimToSize();
+			}
+		}
+	}
+	
 	public synchronized void addPlayer(PlayerBean p) {
 		this.currentPlayers.add(p);
 	}
