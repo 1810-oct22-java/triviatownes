@@ -21,7 +21,7 @@ public class HomeController {
 		
 		HttpSession session = req.getSession();
 		
-		resp.setStatus(404);
+	//	resp.setStatus(404);
 		
 		return "Welcome to Spring2!";
 	}

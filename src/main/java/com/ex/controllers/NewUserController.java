@@ -16,16 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ex.services.GameManagerService;
 
 
+
 @Controller
 @RequestMapping("/new-user")
 @CrossOrigin(origins = "*")
 public class NewUserController {
 	
-	@Autowired
-	HttpServletRequest req;
-	
-	@Autowired
-	HttpServletResponse resp;
+
 	
 	// This creates the "VERBOSE" level if it does not exist yet.
 	final Level VERBOSE = Level.toLevel("VERBOSE");
@@ -35,8 +32,9 @@ public class NewUserController {
 	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	@CrossOrigin(origins = "*")
-	public HttpServletResponse newUser() {
+	public HttpServletResponse newUser(HttpServletRequest req, HttpServletResponse resp) {
 		
+	
 		logger.trace("Hello");
 		
 		//No matter what create a new session if they call this servlet
