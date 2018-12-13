@@ -13,12 +13,12 @@ public class ObjectMapperQuestion {
 	//Turn JSON into question arrayList 
 	public static void main(String[] args) {
 		
-		getQuestions(10, "All");
+		System.out.println(getQuestions(10, "All"));
 		
 	}
 	
 
-	public static  List<QuestionBean> getQuestions(int numOfQuestions, String category) {	
+	public static  ArrayList<QuestionBean> getQuestions(int numOfQuestions, String category) {	
 		// Will populate list with questions fetched from the API
 		ArrayList<QuestionBean> questionList = new ArrayList<QuestionBean>();
 		
@@ -69,15 +69,15 @@ public class ObjectMapperQuestion {
 	public static int convertCategoryToInt(String category) {
 		
 		switch(category) {
-		case "Geography": return 22;
-		case "History": return 23;
-		case "Sport": return 21;
-		case "Politics": return 24;
-		case "Art": return 25;
-		case "Math": return 19;
-		case "Computer": return 18;
-		case "Movies": return 11;
-		case "All": return 0;	
+		case "geography": return 22;
+		case "history": return 23;
+		case "sports": return 21;
+		case "politics": return 24;
+		case "art": return 25;
+		case "math": return 19;
+		case "computer": return 18;
+		case "movies": return 11;
+		case "all": return 0;	
 		default: 
 			System.out.println("wrong category");	// Should throw an exception here
 			return 1;

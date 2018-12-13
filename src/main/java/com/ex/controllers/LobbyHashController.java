@@ -41,14 +41,16 @@ public class LobbyHashController {
 		//Get Game Session Wtih Key
 		GameSessionBean game = gm.getGameByKey(new StringBuffer(gameKey));
 		
-		//Store the top three scores
-		ArrayList<PlayerBean> topPlayers = new ArrayList<PlayerBean>();
-		game.getTopThreePlayers();
-		topPlayers.add(game.getCurrentPlayers().get(0));
-		topPlayers.add(game.getCurrentPlayers().get(1));
-		topPlayers.add(game.getCurrentPlayers().get(2));
+		game.updateGame();
 		
-		return new GameSessionInfo(game);
+		//Sort the players
+		game.getTopThreePlayers();
+		
+		//init the game info object
+		GameSessionInfo gameInfo = new GameSessionInfo(game);
+		gameInfo.setTopScores(game.getCurrentPlayers());
+		
+		return gameInfo;
 	}
 	
 	

@@ -1,11 +1,18 @@
 package com.ex.beans.game;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.apache.log4j.Logger;
+
+import com.ex.controllers.StartGameController;
+
 
 public class GameSessionBean {
+	
+	private static Logger logger = Logger.getLogger(StartGameController.class);
 	
 	QuestionBean currentQuestion;
 	
@@ -35,6 +42,8 @@ public class GameSessionBean {
 	
 	StringBuffer scope;
 	
+	long roundTime = 5;
+	
 	public int count = 0;
 
 	public ArrayList<PlayerBean> currentPlayers;
@@ -49,34 +58,62 @@ public class GameSessionBean {
 	
 	public synchronized void startGame() {
 		
-		this.resetTimer();
+		//Store questions
+		this.Questions = ObjectMapperQuestion.getQuestions(this.numberOfQuestions, this.category.toString().toLowerCase());
+		
+		logger.trace(Questions);
+		logger.trace(this.numberOfQuestions);
+		logger.trace(this.category.toString());
 		
 		//Set the currentQuestion
 		this.currentQuestion = this.Questions.get(this.currentQuestionIndex);
 		
 		//Cut off more players from joining
 		this.maxPlayers = this.currentPlayers.size();
+		
+		// Reset timer to 20 seconds,
+		// This happens last to prevent processing time to take up game time
+		this.resetTimer();
 	}
 	
 	public synchronized void updateGame() {
 		
+		logger.trace("Find me too");
+		//logger.trace(this);
+		logger.trace(this.getCurrentAnswerCounter());
+		logger.trace(this.getCurrentTime());
+		logger.trace(this.getCurrentPlayers().size());
+		
 		//If the timer ran out, reset the 
-		if(this.currentTime == 0 || this.currentPlayers.size() == this.currentAnswerCounter) {
+		if(this.getCurrentTime() == 0 || this.getCurrentPlayers().size() == this.getCurrentAnswerCounter()) {
 			
 			//If game is over
 			if(this.Questions.size() == this.currentQuestionIndex + 1) {
 				
 				//End game state
 				this.state = 2;
+				
+				//Access repo service
+				
 				return;
 			}
+			
+			//Get the new question
+			this.loadNewQuestion();
 			
 			//Set the timer back to 20 seconds;
 			this.resetTimer();
 			
-			this.loadNewQuestion();
-			
+			return;
 		}
+		
+		
+		
+		//Game is still going on, update time
+		//Set current time
+		long now = System.currentTimeMillis();
+		this.setCurrentTime(this.roundTime - ((now - this.getStartTime())/1000));
+		if(this.getCurrentTime() < 0) this.setCurrentTime(0);
 				
 	}
 
@@ -86,14 +123,22 @@ public class GameSessionBean {
 		this.currentQuestionIndex += 1;
 		this.currentQuestion = this.Questions.get(this.currentQuestionIndex);
 		
-		this.currentAnswerCounter = 1;
+		this.currentAnswerCounter = 0;
+	}
+	
+	public synchronized int getAnswerPosition() {
+		this.setCurrentAnswerCounter(this.getCurrentAnswerCounter() + 1);
+		return this.getCurrentAnswerCounter();
 	}
 	
 	public synchronized void resetTimer() {
 		//Set the current timer;
-		this.startTime = System.nanoTime();
-		long now = System.nanoTime();
-		this.currentTime = 20 - ((now - this.startTime)/1000);
+		this.setStartTime(System.currentTimeMillis());
+		logger.trace(System.currentTimeMillis());
+		long now = System.currentTimeMillis();
+		this.setCurrentTime(this.roundTime - ((now - this.getStartTime())/1000));
+		logger.trace("Find me");
+		logger.trace(((now - this.getStartTime())/1000));
 	}
 	
 	public synchronized QuestionBean getCurrentQuestion() {

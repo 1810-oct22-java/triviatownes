@@ -50,6 +50,8 @@ public class SubmitAnswerController {
 			player.setCurrentStreak(0);
 		}
 		
+		
+		
 		return 0;
 	}
 

@@ -17,9 +17,9 @@ public class GameSessionInfo {
 	private ArrayList<PlayerBean> topScores;
 	private int numberOfQuestions;
 	private int currentQuestionNumber;
+	public int status;
 	
 	public GameSessionInfo(GameSessionBean game) {
-		super();
 		this.category = game.getCategory();
 		this.players = game.getCurrentPlayers().size();
 		this.maxPlayers = game.getMaxPlayers();
@@ -32,6 +32,11 @@ public class GameSessionInfo {
 		this.currentCountDown = game.getCurrentTime();
 		this.numberOfQuestions = game.getNumberOfQuestions();
 		this.currentQuestionNumber = game.getCurrentQuestionIndex() + 1;
+		this.status = game.state;
+	}
+	
+	public GameSessionInfo() {
+		
 	}
 	
 	public synchronized QuestionBean getCurrentQuestion() {
@@ -80,10 +85,6 @@ public class GameSessionInfo {
 
 	public synchronized void setCurrentQuestionNumber(int currentQuestionNumber) {
 		this.currentQuestionNumber = currentQuestionNumber;
-	}
-
-	public GameSessionInfo() {
-		
 	}
 	
 	public StringBuffer getKey() {

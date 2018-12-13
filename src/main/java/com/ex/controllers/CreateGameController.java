@@ -59,8 +59,7 @@ public class CreateGameController {
         message.setQuestions(new Integer(req.getParameter("questions")));
         
         count = count + 1;
-        
-        gs.loadQuestions();
+
         return message;
     }
 }
