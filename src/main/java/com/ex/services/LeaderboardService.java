@@ -1,20 +1,22 @@
 package com.ex.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
-import com.ex.beans.game.PlayerBean;
+import com.ex.beans.game.HighScorePlayerBean;
+import com.ex.repository.UserRepository;
 
 
 
-
-@Service("LeaderBoardService")
-public class LeaderBoardService {
-
-	static ArrayList<PlayerBean> players = new ArrayList<PlayerBean>();
-		
+public class LeaderboardService {
+	ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+	UserRepository repo = (UserRepository) context.getBean(UserRepository.class);
+	public List<HighScorePlayerBean> getAll(){
+		return repo.findAll();
+	}
 	
-
 	
 }

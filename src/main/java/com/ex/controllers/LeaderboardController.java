@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ex.beans.game.HighScorePlayerBean;
-import com.ex.services.LeaderBoardService;
+import com.ex.services.LeaderboardService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -19,7 +19,7 @@ public class LeaderboardController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method=RequestMethod.GET)
 	public List<HighScorePlayerBean> getAll() {
-		LeaderBoardService ls = new LeaderBoardService();
+		LeaderboardService ls = new LeaderboardService();
 		return ls.getAll();
 	}
 }

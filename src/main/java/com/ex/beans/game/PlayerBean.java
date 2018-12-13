@@ -1,6 +1,12 @@
 package com.ex.beans.game;
 
+import org.apache.log4j.Logger;
+
+import com.ex.controllers.StartGameController;
+
 public class PlayerBean {
+	
+	private static Logger logger = Logger.getLogger(PlayerBean.class);
 	
 	//Thread safe username
 	private StringBuffer username;
@@ -12,6 +18,8 @@ public class PlayerBean {
 	}
 
 	public synchronized void setPlayerId(int playerId) {
+		logger.trace("User Find");
+		logger.trace(playerId);
 		this.playerId = playerId;
 	}
 
@@ -28,6 +36,16 @@ public class PlayerBean {
 	private int rightAnswers;
 	
 	private int wrongAnswers;
+	
+	public synchronized int getCurrentStreak() {
+		return currentStreak;
+	}
+
+	public synchronized void setCurrentStreak(int currentStreak) {
+		this.currentStreak = currentStreak;
+	}
+
+	private int currentStreak;
 
 	public synchronized StringBuffer getUsername() {
 		return username;

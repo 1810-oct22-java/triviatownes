@@ -22,7 +22,7 @@ public class CreateGameController {
 	
 	private static Logger logger = Logger.getLogger(CreateGameController.class);
 	
-	static int count = 0;
+	static int count = 1185;
         
 	@CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,7 +33,6 @@ public class CreateGameController {
         GameSessionBean gs = service.getGame(id);
         
         gs.setJoinKey(new StringBuffer(count + ""));
-        gs.setDifficulty(new StringBuffer(req.getParameter("difficulty")));
         gs.setCategory(new StringBuffer(req.getParameter("category").toLowerCase()));
         gs.setMaxPlayers(new Integer(req.getParameter("seats")));
         gs.numberOfQuestions = new Integer(req.getParameter("questions"));
@@ -54,10 +53,13 @@ public class CreateGameController {
         JoinLobbyResponse message = new JoinLobbyResponse();
         
         message.setUserId(player.getPlayerId());
-        count = count + 1;
         message.setLobbyId(new StringBuffer(count + ""));
+        message.setCategory(new StringBuffer(req.getParameter("category")));
+        message.setLobbyName(new StringBuffer(req.getParameter("name")));
+        message.setQuestions(new Integer(req.getParameter("questions")));
         
-        gs.loadQuestions();
+        count = count + 1;
+
         return message;
     }
 }

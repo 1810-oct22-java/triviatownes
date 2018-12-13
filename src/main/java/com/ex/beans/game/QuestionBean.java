@@ -15,6 +15,10 @@ public class QuestionBean {
 	private int correctIndex;
 	private Vector<StringBuffer> answers;
 	
+	//payload['isMultipleChoice'];
+	//payload['answers'][0][?]
+	
+	
 	QuestionBean(){
 		answers = new Vector<StringBuffer>();
 	}

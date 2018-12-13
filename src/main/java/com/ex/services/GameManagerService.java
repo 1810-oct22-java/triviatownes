@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.ex.beans.game.GameSessionBean;
+import com.ex.beans.game.GameSessionInfo;
 //import com.ex.beans.game.GameSessionInfo;
 import com.ex.beans.game.PlayerBean;
-import com.ex.servlets.NewUserServlet;
 
 public class GameManagerService {
 	
@@ -133,13 +133,15 @@ public class GameManagerService {
 		return this.populated;
 	}
 	
-/*	synchronized public ArrayList<GameSessionInfo> getGameSessionsInfo(String category) {
+	synchronized public ArrayList<GameSessionInfo> getGameSessionsInfo(String category) {
 		
 		ArrayList<GameSessionInfo> serverList = new ArrayList<GameSessionInfo>();
 		
 		for(int i = 0; i < gameList.size(); i++) {
 			
 			if(gameList.get(i) == null) continue;
+			
+			if(gameList.get(i).getState() != 0) continue;
 			
 			if(category.equals("all") || category.equals(gameList.get(i).getCategory().toString().toLowerCase())) {
 			
@@ -159,7 +161,7 @@ public class GameManagerService {
 		
 		return serverList;
 	}
-	*/
+	
 	synchronized public GameSessionBean getGameByKey(StringBuffer key) {
 		
 		for(int i = 0; i < this.gameList.size(); i++) {
