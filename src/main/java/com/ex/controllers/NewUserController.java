@@ -21,37 +21,37 @@ import com.ex.services.GameManagerService;
 @CrossOrigin(origins = "*")
 public class NewUserController {
 	
-//	@Autowired
-//	HttpServletRequest req;
-//	
-//	@Autowired
-//	HttpServletResponse resp;
-//	
-//	// This creates the "VERBOSE" level if it does not exist yet.
-//	final Level VERBOSE = Level.toLevel("VERBOSE");
-//	
-//	private static Logger logger = Logger.getLogger(NewUserController.class);
-//	
-//	@RequestMapping(method=RequestMethod.GET)
-//	@ResponseBody
-//	@CrossOrigin(origins = "*")
-//	public HttpServletResponse newUser() {
-//		
-//		logger.trace("Hello");
-//		
-//		//No matter what create a new session if they call this servlet
-//		HttpSession session = req.getSession(false);
-//		if (session == null) {
-//			logger.trace("We got work");
-//		    session = req.getSession(true);
-//		} else {
-//			logger.trace("Yup, we're guchi");
-//			session.invalidate();
-//			session = req.getSession(true);
-//			
-//		}
-//		return null;
-//	}
+	@Autowired
+	HttpServletRequest req;
+	
+	@Autowired
+	HttpServletResponse resp;
+	
+	// This creates the "VERBOSE" level if it does not exist yet.
+	final Level VERBOSE = Level.toLevel("VERBOSE");
+	
+	private static Logger logger = Logger.getLogger(NewUserController.class);
+	
+	@RequestMapping(method=RequestMethod.GET)
+	@ResponseBody
+	@CrossOrigin(origins = "*")
+	public HttpServletResponse newUser() {
+		
+		logger.trace("Hello");
+		
+		//No matter what create a new session if they call this servlet
+		HttpSession session = req.getSession(false);
+		if (session == null) {
+			logger.trace("We got work");
+		    session = req.getSession(true);
+		} else {
+			logger.trace("Yup, we're guchi");
+			session.invalidate();
+			session = req.getSession(true);
+			
+		}
+		return null;
+	}
 	
 
 }
