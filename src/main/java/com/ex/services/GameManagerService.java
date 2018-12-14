@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 
 import com.ex.beans.game.GameSessionBean;
 import com.ex.beans.game.GameSessionInfo;
+//import com.ex.beans.game.GameSessionInfo;
 import com.ex.beans.game.PlayerBean;
-import com.ex.servlets.NewUserServlet;
 
 public class GameManagerService {
 	

@@ -1,6 +1,5 @@
 package com.ex.beans.game;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,6 +7,7 @@ import java.util.Comparator;
 import org.apache.log4j.Logger;
 
 import com.ex.controllers.StartGameController;
+import com.ex.services.LeaderboardService;
 
 
 public class GameSessionBean {
@@ -122,6 +122,12 @@ public class GameSessionBean {
 				//End game state
 				this.state = 2;
 				
+				LeaderboardService ls = new LeaderboardService();
+				for (PlayerBean pb : currentPlayers)
+				{
+					HighScorePlayerBean hb = new HighScorePlayerBean(pb.getUsername().toString(),pb.getScore(),pb.getMaxStreak(),pb.getRightAnswers());
+					ls.save(hb);
+				}
 				//Access repo service
 				
 				return;
