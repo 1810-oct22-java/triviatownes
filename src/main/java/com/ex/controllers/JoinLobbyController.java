@@ -2,6 +2,7 @@ package com.ex.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
@@ -58,6 +59,10 @@ public class JoinLobbyController {
 	        message.setCategory(game.getCategory());
 	        message.setLobbyName(game.getName());
 	        message.setQuestions(game.numberOfQuestions);
+	        
+	        HttpSession session = req.getSession();
+	        session.setAttribute("playerId", game.count);
+	        session.setAttribute("lobbyId", count + "");
 	        
 		}
 
