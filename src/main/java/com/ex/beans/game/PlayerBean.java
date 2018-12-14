@@ -37,6 +37,16 @@ public class PlayerBean {
 	
 	private int wrongAnswers;
 	
+	private Boolean connected = false;
+	
+	public synchronized Boolean isConnected() {
+		return this.connected;
+	}
+	
+	public synchronized void setConnected() {
+		this.connected = true;
+	}
+	
 	public synchronized int getCurrentStreak() {
 		return currentStreak;
 	}

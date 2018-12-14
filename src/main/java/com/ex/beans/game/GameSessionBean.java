@@ -54,9 +54,36 @@ public class GameSessionBean {
 	
 	ArrayList<QuestionBean> Questions;
 	
+	public synchronized void setUserConnected(int id) {
+		
+		for(int i = 0; i < this.getCurrentPlayers().size(); i++) {
+			if(this.getCurrentPlayers().get(i).getPlayerId() == id) {
+				this.getCurrentPlayers().get(i).setConnected();
+			}
+		}
+		
+	}
 	
+	public synchronized void waitForConnection() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public synchronized void startGame() {
+		
+		//this.waitForConnection();
+		
+		//Remove all players not connected
+		/*
+		for(int i = 0; i < this.getCurrentPlayers().size(); i++) {
+			if(this.getCurrentPlayers().get(i).isConnected() == false) {
+				this.getCurrentPlayers().remove(i);
+			}
+		}
+		*/
 		
 		//Store questions
 		this.Questions = ObjectMapperQuestion.getQuestions(this.numberOfQuestions, this.category.toString().toLowerCase());

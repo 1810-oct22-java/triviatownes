@@ -22,7 +22,6 @@ import com.ex.services.GameManagerService;
 public class CreateGameController {
 	
 	private static Logger logger = Logger.getLogger(CreateGameController.class);
-	
 	static int count = 1185;
         
 	@CrossOrigin(origins = "*")
