@@ -22,7 +22,7 @@ import com.ex.services.GameManagerService;
 
 
 @Controller
-@RequestMapping("/disconnect")
+@RequestMapping("/disconnectdfdfd")
 @CrossOrigin(origins = "*")
 public class DisconnectController {
 	
