@@ -1,17 +1,9 @@
 package com.ex.controllers;
 
-import static java.lang.String.valueOf;
-import static java.time.LocalDateTime.now;
-
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -19,8 +11,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ex.beans.game.GameSessionBean;
@@ -29,29 +19,37 @@ import com.ex.beans.game.PlayerBean;
 import com.ex.beans.game.UserMessage;
 import com.ex.beans.game.WaitingMessage;
 import com.ex.services.GameManagerService;
-import com.google.gson.Gson;
 
+/*
+ * This class is used for receiving web socket communications
+ * */
 @Controller
 @CrossOrigin(origins = "*")
-public class LobbyHashController {
+public class WebSocketConnectionController {
 	
-	private static Logger logger = Logger.getLogger(LobbyHashController.class);
-	
+	/*
+	 * Receives all game chat messages sent by a user in a specific game
+	 * and sends the message to all connected users in that game with a time stamp
+	 * */
 	@MessageMapping("{lobbyId}/recive-chat-game")
 	@SendTo("/send-game-update/{lobbyId}/send-chat")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public UserMessage getMessageGame(@Payload UserMessage userResponse) {
+	public UserMessage getActiveGameMessage(@Payload UserMessage userResponse) {
 		
 		userResponse.setTime(new StringBuffer(DateTimeFormatter.ofPattern("hh:mm a").format(LocalTime.now())));
 		return userResponse;
 	}
 	
+	/*
+	 * Receives all game chat messages sent by a user in a specific waiting lobby
+	 * and sends the message to all connected users in that lobby with a time stamp
+	 * */
 	@MessageMapping("{lobbyId}/recive-chat")
 	@SendTo("/waiting/{lobbyId}/send-chat")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public UserMessage getMessage(@Payload UserMessage userResponse) {
+	public UserMessage getWatingLobbyMessage(@Payload UserMessage userResponse) {
 		
 		userResponse.setTime(new StringBuffer(DateTimeFormatter.ofPattern("hh:mm a").format(LocalTime.now())));
 		return userResponse;
@@ -61,86 +59,55 @@ public class LobbyHashController {
 	@SendTo("/send-game-update/{gameKey}/get-game-data")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public GameSessionInfo connect3(@DestinationVariable String gameKey,SimpMessageHeaderAccessor headerAccessor) {
+	public GameSessionInfo activeGameUpdate(@DestinationVariable String gameKey,SimpMessageHeaderAccessor headerAccessor) {
 		
-		//Game Manager Service
+		//Game Manager Service to access current game
 		GameManagerService gm = GameManagerService.getInstance();
 		
 		//Get Game Session Wtih Key
 		GameSessionBean game = gm.getGameByKey(new StringBuffer(gameKey));
 		
+		//If the game isn't over send a game update
 		if(game.getState() != 2) game.updateGame();
 		
 		//Sort the players
 		game.getTopThreePlayers();
 		
-		//init the game info object
+		//Used to send the clients all information about the game
 		GameSessionInfo gameInfo = new GameSessionInfo(game);
 		
+		//If the game is in the 2 second waiting period in between each round tell the clients everyone has answered
 		if(game.getState() == 3) gameInfo.setNumberOfAnswers(gameInfo.getPlayers());
 		
+		//Store a list of connected users in order of highest points
 		gameInfo.setTopScores(game.getCurrentPlayers());
 		
-		logger.trace("returning");
+		//Send a message to all listening clients with all updated game info
 		return gameInfo;
 	}
 	
-	
-	
-	@MessageMapping("{category}/get-lobby-data")
-	@SendTo("/lobbies-hash/{category}/get-lobby-data")
-	@CrossOrigin(origins = "*")
-	@ResponseBody
-	public int connect(@DestinationVariable String category,SimpMessageHeaderAccessor headerAccessor){
-		
-		logger.trace(category);
-		logger.trace("Hello");
-		
-		GameManagerService gm = GameManagerService.getInstance();
-		
-		gm.gameList = new ArrayList<GameSessionBean>();
-		gm.makeDummyList();
-		
-		gm.getGame(0).getCurrentPlayers().add(new PlayerBean());
-	
-		ArrayList<GameSessionInfo> payload = gm.getGameSessionsInfo(category);
-		
-		int jsonHash = new Gson().toJson(payload).hashCode();
-		
-		
-		 
-		logger.trace(jsonHash);
-		
-		return jsonHash;
-	}
-	
+	/*
+	 * Used to tell each client
+	 * how many players are in the same waiting lobby and when to navigate to the game screen
+	 * */
 	@MessageMapping("{lobbyId}/{userId}/update-waiting")
 	@SendTo("/waiting/{lobbyId}/{userId}/send-waiting")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public WaitingMessage connect2(@DestinationVariable String lobbyId, @DestinationVariable String userId, SimpMessageHeaderAccessor headerAccessor) {
+	public WaitingMessage waitinglobbyUpdate(@DestinationVariable String lobbyId, @DestinationVariable String userId, SimpMessageHeaderAccessor headerAccessor) {
 		
-		logger.trace("LOOK FOR ME");
-		
-		headerAccessor.getSessionAttributes().put("user", userId);
-		headerAccessor.getSessionAttributes().put("lobby", lobbyId);
-		
+		//Game Manager Service to access current game
 		GameManagerService gm = GameManagerService.getInstance();
 		
+		//Store a reference to the current game retried by game key
 		GameSessionBean game = gm.getGameByKey(new StringBuffer(lobbyId));
 		
-		logger.trace(game);
-		
-		//game.addDumbyData();
-		//logger.trace("Is this it");
-		
-		//game.addDummyPlayer();
-		
+		//Get game status (0 for waiting and 1 for game is starting)
 		ArrayList<PlayerBean> playerList = game.getCurrentPlayers();
-		WaitingMessage wm = new WaitingMessage();
-		
 		int status = game.getState();
 		
+		//Create the message with the waiting lobby info and store information about game
+		WaitingMessage wm = new WaitingMessage();
 		wm.setPlayers(playerList);
 		wm.setStatus(status);
 		

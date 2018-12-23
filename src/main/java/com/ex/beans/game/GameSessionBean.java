@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.ex.controllers.StartGameController;
 import com.ex.services.LeaderboardService;
+import com.ex.services.OpenTDBService;
 
 
 public class GameSessionBean {
@@ -87,7 +88,7 @@ public class GameSessionBean {
 		*/
 		
 		//Store questions
-		this.Questions = ObjectMapperQuestion.getQuestions(this.numberOfQuestions, this.category.toString().toLowerCase());
+		this.Questions = OpenTDBService.getQuestions(this.numberOfQuestions, this.category.toString().toLowerCase());
 		
 		logger.trace(Questions);
 		logger.trace(this.numberOfQuestions);

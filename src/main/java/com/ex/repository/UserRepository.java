@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<HighScorePlayerBean, Integ
 
 	public List<HighScorePlayerBean> findAll();
 	
+	@SuppressWarnings("unchecked")
 	public HighScorePlayerBean save(HighScorePlayerBean persisted);
 	
 }

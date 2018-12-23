@@ -14,6 +14,11 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 
+/**
+ * 
+ * WebSocketConfig
+ * -> This class is used to register end points for web socket connections
+ * */
 @Configuration
 @EnableWebSocketMessageBroker
 @CrossOrigin(origins = "*")
@@ -21,19 +26,19 @@ public class WebSocketConfig  implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/select-lobby-hash").setAllowedOrigins("*");
 		registry.addEndpoint("/join-waiting-lobby").setAllowedOrigins("*");
 		registry.addEndpoint("/join-game-session").setAllowedOrigins("*");
 	}
 	
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		//registry.enableSimpleBroker("/lobbies-hash");
-		registry.enableSimpleBroker("/waiting","/lobbies-hash", "/send-game-update");
-		registry.setApplicationDestinationPrefixes("/waiting-update","/lobby-hash-update","/game-update");
-		//registry.setApplicationDestinationPrefixes("/waiting-update");
+		registry.enableSimpleBroker("/waiting", "/send-game-update");
+		registry.setApplicationDestinationPrefixes("/waiting-update", "/game-update");
 	}
-
+	
+	/*
+	 * All other methods have not been modified, but are needed to run the server
+	 * */
 	@Override
 	public void configureWebSocketTransport(WebSocketTransportRegistration registry) {
 		// TODO Auto-generated method stub

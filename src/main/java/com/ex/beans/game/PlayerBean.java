@@ -2,8 +2,6 @@ package com.ex.beans.game;
 
 import org.apache.log4j.Logger;
 
-import com.ex.controllers.StartGameController;
-
 public class PlayerBean {
 	
 	private static Logger logger = Logger.getLogger(PlayerBean.class);

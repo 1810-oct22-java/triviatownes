@@ -2,24 +2,20 @@ package com.ex.services;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
-
 import com.ex.beans.game.GameSessionBean;
 import com.ex.beans.game.GameSessionInfo;
-//import com.ex.beans.game.GameSessionInfo;
-import com.ex.beans.game.PlayerBean;
 
+/*
+ * This class is used for accessing game sessions
+ * This class follows the lazy singleton design pattern
+ * */
 public class GameManagerService {
 	
-	private static GameManagerService instance; 
+	//This stores the instance of the singleton 
+	private static GameManagerService instance;
 	
-	public String test;
-	
+	//The stores the active game sessions
 	public ArrayList<GameSessionBean> gameList;
-	
-	public Boolean populated = false;
-	
-	private static Logger logger = Logger.getLogger(GameManagerService.class);
 	
 	//Overrides the default public constructor
 	private GameManagerService() {}
@@ -43,112 +39,76 @@ public class GameManagerService {
 		return instance; 
 	}
 	
+	/*
+	 * Creates a new game and adds it to the list of games
+	 * returns the index of the game
+	 */
 	synchronized public int createGame() {
 		
+		//Create the new game instance
 		GameSessionBean temp = new GameSessionBean();
 		
-		for(int i = 0; i < gameList.size(); i++) {
-			if(gameList.get(i) == null) {
-				temp.setInstanceId(i);
-				gameList.add(temp);
-				return i;
-			}
-		}
-		
+		//Set the instance id that corresponds to the index in the list
 		temp.setInstanceId(gameList.size());
-		gameList.add(temp);
-		return gameList.size() - 1;
 		
+		//Add the instance to the list
+		gameList.add(temp);
+		
+		//Return the index of the instance
+		return gameList.size() - 1;
 	}
 	
+	/*
+	 * Get game by id
+	 * */
 	synchronized public GameSessionBean getGame(int gameIndex) {
 		return gameList.get(gameIndex);
 	}
 	
-	synchronized public void makeDummyList() {
+	/*
+	 * Get game by key
+	 * */
+	synchronized public GameSessionBean getGameByKey(StringBuffer key) {
 		
-		int count = 0;
-		
-		for(int i = 0; i < 5; i ++) {
-			int tempId = createGame();
-			getGame(tempId).setCategory(new StringBuffer("art"));
+		//Loop through each game
+		for(int i = 0; i < this.gameList.size(); i++) {
 			
-			ArrayList<PlayerBean> players = new ArrayList<PlayerBean>();
-			
-			for(int y = 0; y < i; y++)
-				players.add(new PlayerBean());
-			
-			getGame(tempId).setCurrentPlayers(players);
-			
-			getGame(tempId).setMaxPlayers(i + 4);
-			
-			getGame(tempId).setScope(new StringBuffer("public"));
-			
-			getGame(tempId).setName(new StringBuffer("test"));
-			
-			getGame(tempId).setDifficulty(new StringBuffer("hard"));
-			
-			getGame(tempId).setInstanceId(tempId);
-			
-			getGame(tempId).setJoinKey(new StringBuffer(count * 5 + "hello"));
-			
-			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
-			count  = count + 1;
+			//Find and return the game
+			if(gameList.get(i).getJoinKey().toString().equals(key.toString())) {
+				return gameList.get(i);
+			}
 		}
 		
-		for(int i = 0; i < 5; i ++) {
-			int tempId = createGame();
-			getGame(tempId).setCategory(new StringBuffer("sports"));
-			
-			ArrayList<PlayerBean> players = new ArrayList<PlayerBean>();
-			
-			for(int y = 0; y < i; y++)
-				players.add(new PlayerBean());
-			
-			getGame(tempId).setCurrentPlayers(players);
-			
-			getGame(tempId).setMaxPlayers(i + 4);
-			
-			getGame(tempId).setScope(new StringBuffer("private"));
-			
-			getGame(tempId).setName(new StringBuffer("another name"));
-			
-			getGame(tempId).setDifficulty(new StringBuffer("easy"));
-			
-			getGame(tempId).setInstanceId(tempId);
-			
-			getGame(tempId).setJoinKey(new StringBuffer(count * 5 + "hello"));
-			
-			getGame(tempId).setJoinKey(new StringBuffer(count + ""));
-			count  = count + 1;
-		}
-		
-		logger.trace("List is filled with " + gameList.size() + " games");
-		
-		this.populated = true;
-		
+		//Returns null if no game with that key was found
+		return null;
 	}
 	
-	synchronized public Boolean isFilled() {
-		return this.populated;
-	}
-	
+	/*
+	 * Used to get a list of games for a specific category that need additional players
+	 * Only public lobbies are returned
+	 * */
 	synchronized public ArrayList<GameSessionInfo> getGameSessionsInfo(String category) {
 		
+		//Creates a new list for storing the game info objects
 		ArrayList<GameSessionInfo> serverList = new ArrayList<GameSessionInfo>();
 		
+		//Loops through each of the games
 		for(int i = 0; i < gameList.size(); i++) {
 			
+			//Don't check null values
 			if(gameList.get(i) == null) continue;
 			
+			//Don't returns games that aren't in the waiting state
 			if(gameList.get(i).getState() != 0) continue;
 			
+			//Don't return games that are private (private games can only be accessed by key)
 			if(gameList.get(i).getScope().toString().equals("true")) continue;
 			
+			//Only return games of the requested category
 			if(category.equals("all") || category.equals(gameList.get(i).getCategory().toString().toLowerCase())) {
-			
-				GameSessionInfo temp = new GameSessionInfo();
 				
+				//Create a game info object and store information about a real game
+				GameSessionInfo temp = new GameSessionInfo();
 				temp.setCategory(gameList.get(i).getCategory());
 				temp.setName(gameList.get(i).getName());
 				temp.setDifficulty(gameList.get(i).getDifficulty());
@@ -157,22 +117,10 @@ public class GameManagerService {
 				temp.setScope(gameList.get(i).getScope());
 				temp.setKey(gameList.get(i).getJoinKey());
 				
+				//Add it to the list that will be returned
 				serverList.add(temp);
 			}
 		}
-		
 		return serverList;
-	}
-	
-	synchronized public GameSessionBean getGameByKey(StringBuffer key) {
-		
-		for(int i = 0; i < this.gameList.size(); i++) {
-			
-			if(gameList.get(i).getJoinKey().toString().equals(key.toString())) {
-				return gameList.get(i);
-			}
-		}
-		
-		return null;
 	}
 }

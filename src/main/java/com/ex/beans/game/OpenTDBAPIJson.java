@@ -2,9 +2,7 @@ package com.ex.beans.game;
 
 import java.util.Arrays;
 
-import org.springframework.stereotype.Component;
-
-public class APIJson {
+public class OpenTDBAPIJson {
 	
 	private String response_code;
 	//private Results[] results;
@@ -26,10 +24,4 @@ public class APIJson {
 	public String toString() {
 		return "ObjectJSON [response_code=" + response_code + ", question=" + Arrays.toString(results) + "]";
 	}
-	
-	
-	
-	
-	
-
 }

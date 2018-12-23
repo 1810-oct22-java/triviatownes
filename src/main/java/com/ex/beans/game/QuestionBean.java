@@ -19,7 +19,7 @@ public class QuestionBean {
 	//payload['answers'][0][?]
 	
 	
-	QuestionBean(){
+	public QuestionBean(){
 		answers = new Vector<StringBuffer>();
 	}
 	

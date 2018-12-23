@@ -3,7 +3,6 @@ package com.ex.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +16,6 @@ import com.ex.services.GameManagerService;
 @RequestMapping("/start-game")
 @CrossOrigin(origins = "*")
 public class StartGameController {
-	
-	private static Logger logger = Logger.getLogger(StartGameController.class);
 	
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
@@ -36,5 +33,4 @@ public class StartGameController {
 		
 		return 0;
 	}
-
 }

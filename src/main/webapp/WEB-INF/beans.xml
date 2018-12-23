@@ -21,9 +21,9 @@
 	
 	  <bean name="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-       <property name="url" value="jdbc:mysql://triviatownes.c5timusmxt75.us-east-1.rds.amazonaws.com:3306/triviatownes" /> 
-       <property name="username" value="triviatownes"  /> 
-       <property name="password" value="triviatownes" />  
+       <property name="url" value="jdbc:mysql://localhost:3306/triviatownes" /> 
+       <property name="username" value="bot101"  /> 
+       <property name="password" value="" />  
     
     </bean>
     <bean id="hibernateJpaVendorAdapter"
