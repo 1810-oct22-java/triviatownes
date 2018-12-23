@@ -1,4 +1,4 @@
-package com.ex.beans.game;
+package com.ex.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,7 @@ import java.util.Comparator;
 import org.apache.log4j.Logger;
 
 import com.ex.controllers.StartGameController;
+import com.ex.data.HighScorePlayerBean;
 import com.ex.services.LeaderboardService;
 import com.ex.services.OpenTDBService;
 
@@ -31,7 +32,7 @@ public class GameSessionBean {
 	
 	public int numberOfQuestions;
 
-	int state;
+	public int state;
 	
 	public StringBuffer globalChatBuffer;
 	
@@ -75,17 +76,6 @@ public class GameSessionBean {
 	}
 	
 	public synchronized void startGame() {
-		
-		//this.waitForConnection();
-		
-		//Remove all players not connected
-		/*
-		for(int i = 0; i < this.getCurrentPlayers().size(); i++) {
-			if(this.getCurrentPlayers().get(i).isConnected() == false) {
-				this.getCurrentPlayers().remove(i);
-			}
-		}
-		*/
 		
 		//Store questions
 		this.Questions = OpenTDBService.getQuestions(this.numberOfQuestions, this.category.toString().toLowerCase());

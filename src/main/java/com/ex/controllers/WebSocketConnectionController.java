@@ -13,11 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ex.beans.game.GameSessionBean;
-import com.ex.beans.game.GameSessionInfo;
-import com.ex.beans.game.PlayerBean;
-import com.ex.beans.game.UserMessage;
-import com.ex.beans.game.WaitingMessage;
+import com.ex.game.GameSessionBean;
+import com.ex.game.PlayerBean;
+import com.ex.messages.GameInfoMessage;
+import com.ex.messages.PlayerChatMessage;
+import com.ex.messages.WaitingMessage;
 import com.ex.services.GameManagerService;
 
 /*
@@ -35,7 +35,7 @@ public class WebSocketConnectionController {
 	@SendTo("/send-game-update/{lobbyId}/send-chat")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public UserMessage getActiveGameMessage(@Payload UserMessage userResponse) {
+	public PlayerChatMessage getActiveGameMessage(@Payload PlayerChatMessage userResponse) {
 		
 		userResponse.setTime(new StringBuffer(DateTimeFormatter.ofPattern("hh:mm a").format(LocalTime.now())));
 		return userResponse;
@@ -49,7 +49,7 @@ public class WebSocketConnectionController {
 	@SendTo("/waiting/{lobbyId}/send-chat")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public UserMessage getWatingLobbyMessage(@Payload UserMessage userResponse) {
+	public PlayerChatMessage getWatingLobbyMessage(@Payload PlayerChatMessage userResponse) {
 		
 		userResponse.setTime(new StringBuffer(DateTimeFormatter.ofPattern("hh:mm a").format(LocalTime.now())));
 		return userResponse;
@@ -59,7 +59,7 @@ public class WebSocketConnectionController {
 	@SendTo("/send-game-update/{gameKey}/get-game-data")
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public GameSessionInfo activeGameUpdate(@DestinationVariable String gameKey,SimpMessageHeaderAccessor headerAccessor) {
+	public GameInfoMessage activeGameUpdate(@DestinationVariable String gameKey,SimpMessageHeaderAccessor headerAccessor) {
 		
 		//Game Manager Service to access current game
 		GameManagerService gm = GameManagerService.getInstance();
@@ -74,7 +74,7 @@ public class WebSocketConnectionController {
 		game.getTopThreePlayers();
 		
 		//Used to send the clients all information about the game
-		GameSessionInfo gameInfo = new GameSessionInfo(game);
+		GameInfoMessage gameInfo = new GameInfoMessage(game);
 		
 		//If the game is in the 2 second waiting period in between each round tell the clients everyone has answered
 		if(game.getState() == 3) gameInfo.setNumberOfAnswers(gameInfo.getPlayers());

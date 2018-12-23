@@ -1,6 +1,6 @@
-package com.ex.beans.game;
+package com.ex.messages;
 
-public class UserMessage {
+public class PlayerChatMessage {
 	
 	StringBuffer username;
 	StringBuffer message;

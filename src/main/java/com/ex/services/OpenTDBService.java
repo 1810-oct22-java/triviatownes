@@ -4,20 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import com.ex.beans.game.OpenTDBAPIJson;
-import com.ex.beans.game.QuestionBean;
-import com.ex.beans.game.QuestionJson;
+import com.ex.api.opentdb.OpenTDBAPIJson;
+import com.ex.api.opentdb.QuestionJson;
+import com.ex.game.QuestionBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class OpenTDBService {
-	
-	
-	//Turn JSON into question arrayList 
-	public static void main(String[] args) {
-		
-		System.out.println(getQuestions(10, "All"));
-		
-	}
 	
 
 	public static  ArrayList<QuestionBean> getQuestions(int numOfQuestions, String category) {	

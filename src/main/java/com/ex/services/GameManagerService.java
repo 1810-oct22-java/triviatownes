@@ -2,8 +2,8 @@ package com.ex.services;
 
 import java.util.ArrayList;
 
-import com.ex.beans.game.GameSessionBean;
-import com.ex.beans.game.GameSessionInfo;
+import com.ex.game.GameSessionBean;
+import com.ex.messages.GameInfoMessage;
 
 /*
  * This class is used for accessing game sessions
@@ -87,10 +87,10 @@ public class GameManagerService {
 	 * Used to get a list of games for a specific category that need additional players
 	 * Only public lobbies are returned
 	 * */
-	synchronized public ArrayList<GameSessionInfo> getGameSessionsInfo(String category) {
+	synchronized public ArrayList<GameInfoMessage> getGameSessionsInfo(String category) {
 		
 		//Creates a new list for storing the game info objects
-		ArrayList<GameSessionInfo> serverList = new ArrayList<GameSessionInfo>();
+		ArrayList<GameInfoMessage> serverList = new ArrayList<GameInfoMessage>();
 		
 		//Loops through each of the games
 		for(int i = 0; i < gameList.size(); i++) {
@@ -108,7 +108,7 @@ public class GameManagerService {
 			if(category.equals("all") || category.equals(gameList.get(i).getCategory().toString().toLowerCase())) {
 				
 				//Create a game info object and store information about a real game
-				GameSessionInfo temp = new GameSessionInfo();
+				GameInfoMessage temp = new GameInfoMessage();
 				temp.setCategory(gameList.get(i).getCategory());
 				temp.setName(gameList.get(i).getName());
 				temp.setDifficulty(gameList.get(i).getDifficulty());

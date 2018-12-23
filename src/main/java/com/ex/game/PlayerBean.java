@@ -1,4 +1,4 @@
-package com.ex.beans.game;
+package com.ex.game;
 
 import org.apache.log4j.Logger;
 

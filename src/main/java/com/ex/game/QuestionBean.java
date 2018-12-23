@@ -1,4 +1,4 @@
-package com.ex.beans.game;
+package com.ex.game;
 
 import java.util.Collections;
 import java.util.Vector;
@@ -14,9 +14,6 @@ public class QuestionBean {
 	private StringBuffer question;
 	private int correctIndex;
 	private Vector<StringBuffer> answers;
-	
-	//payload['isMultipleChoice'];
-	//payload['answers'][0][?]
 	
 	
 	public QuestionBean(){

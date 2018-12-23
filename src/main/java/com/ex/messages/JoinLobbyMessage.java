@@ -1,6 +1,6 @@
-package com.ex.beans.game;
+package com.ex.messages;
 
-public class JoinLobbyResponse {
+public class JoinLobbyMessage {
 	
 	int userId;
 	StringBuffer lobbyId;

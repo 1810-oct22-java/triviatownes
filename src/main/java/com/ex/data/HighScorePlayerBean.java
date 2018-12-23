@@ -1,4 +1,4 @@
-package com.ex.beans.game;
+package com.ex.data;
 
 import java.io.Serializable;
 

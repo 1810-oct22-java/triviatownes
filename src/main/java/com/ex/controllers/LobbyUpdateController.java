@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ex.beans.game.GameSessionInfo;
+import com.ex.messages.GameInfoMessage;
 import com.ex.services.GameManagerService;
 import com.google.gson.Gson;
 
@@ -37,7 +37,7 @@ public class LobbyUpdateController {
 		
 		logger.trace(gm.gameList.size());
 		
-		ArrayList<GameSessionInfo> payload = gm.getGameSessionsInfo(category.toLowerCase());
+		ArrayList<GameInfoMessage> payload = gm.getGameSessionsInfo(category.toLowerCase());
 		
 		logger.trace("Hello");
 		

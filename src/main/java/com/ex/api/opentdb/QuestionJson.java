@@ -1,8 +1,8 @@
-package com.ex.beans.game;
+package com.ex.api.opentdb;
 
 import java.util.Arrays;
 
-public class Results {
+public class QuestionJson {
 	
 	private String category;
 	private String type;
@@ -10,6 +10,7 @@ public class Results {
 	private String question;
 	private String correct_answer;
 	private String[] incorrect_answers;
+	
 	public String getCategory() {
 		return category;
 	}
@@ -49,7 +50,7 @@ public class Results {
 	@Override
 	public String toString() {
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("\n--------Question JSON--------\n");
 		sb.append("Category: " + getCategory() + "\n");
 		sb.append("Type: " + getType() + "\n");
@@ -59,5 +60,6 @@ public class Results {
 		sb.append("Incorrect answer: " + Arrays.toString(getIncorrect_answers()) + "\n");
 		return sb.toString();
 	}
+
 
 }

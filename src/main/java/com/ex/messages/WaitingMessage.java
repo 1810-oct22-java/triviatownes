@@ -1,6 +1,8 @@
-package com.ex.beans.game;
+package com.ex.messages;
 
 import java.util.ArrayList;
+
+import com.ex.game.PlayerBean;
 
 public class WaitingMessage {
 	

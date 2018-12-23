@@ -1,8 +1,12 @@
-package com.ex.beans.game;
+package com.ex.messages;
 
 import java.util.ArrayList;
 
-public class GameSessionInfo {
+import com.ex.game.GameSessionBean;
+import com.ex.game.PlayerBean;
+import com.ex.game.QuestionBean;
+
+public class GameInfoMessage {
 	
 	private StringBuffer category;
 	private int players;
@@ -19,22 +23,8 @@ public class GameSessionInfo {
 	private int currentQuestionNumber;
 	public int status;
 	
-	public GameSessionInfo(GameSessionBean game) {
-		/*
-		this.category = game.getCategory();
-		this.players = game.getCurrentPlayers().size();
-		this.maxPlayers = game.getMaxPlayers();
-		this.name = game.getName();
-		this.scope = game.getScope();
-		this.difficulty = game.getDifficulty();
-		this.key = game.getJoinKey();
-		this.currentQuestion = game.getCurrentQuestion();
-		this.numberOfAnswers = game.getCurrentAnswerCounter();
-		this.currentCountDown = game.getCurrentTime();
-		this.numberOfQuestions = game.getNumberOfQuestions();
-		this.currentQuestionNumber = game.getCurrentQuestionIndex() + 1;
-		this.status = game.state;
-		*/
+	public GameInfoMessage(GameSessionBean game) {
+
 		this.category = game.category;
 		this.players = game.currentPlayers.size();
 		this.maxPlayers = game.maxPlayers;
@@ -50,7 +40,7 @@ public class GameSessionInfo {
 		this.status = game.state;
 	}
 	
-	public GameSessionInfo() {
+	public GameInfoMessage() {
 		
 	}
 	

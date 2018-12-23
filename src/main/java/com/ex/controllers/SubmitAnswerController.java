@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ex.beans.game.GameSessionBean;
-import com.ex.beans.game.PlayerBean;
+import com.ex.game.GameSessionBean;
+import com.ex.game.PlayerBean;
 import com.ex.services.GameManagerService;
 
 /*

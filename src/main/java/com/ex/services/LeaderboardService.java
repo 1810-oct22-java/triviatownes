@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ex.beans.game.HighScorePlayerBean;
+import com.ex.data.HighScorePlayerBean;
 import com.ex.repository.UserRepository;
 
 /*

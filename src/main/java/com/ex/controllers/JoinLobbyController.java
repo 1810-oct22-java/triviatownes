@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ex.beans.game.GameSessionBean;
-import com.ex.beans.game.JoinLobbyResponse;
-import com.ex.beans.game.PlayerBean;
+import com.ex.game.GameSessionBean;
+import com.ex.game.PlayerBean;
+import com.ex.messages.JoinLobbyMessage;
 import com.ex.services.GameManagerService;
 
 @RestController
@@ -27,11 +27,11 @@ public class JoinLobbyController {
         
 	@CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public JoinLobbyResponse joinGame(HttpServletRequest req, HttpServletResponse resp) {
+    public JoinLobbyMessage joinGame(HttpServletRequest req, HttpServletResponse resp) {
 		
 		logger.trace("Joining Lobby");
 		
-		JoinLobbyResponse message = new JoinLobbyResponse();
+		JoinLobbyMessage message = new JoinLobbyMessage();
 		
 		String key = req.getParameter("lobbyKey");
 		

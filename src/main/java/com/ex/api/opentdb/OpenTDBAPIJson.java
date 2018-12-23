@@ -1,11 +1,10 @@
-package com.ex.beans.game;
+package com.ex.api.opentdb;
 
 import java.util.Arrays;
 
 public class OpenTDBAPIJson {
 	
 	private String response_code;
-	//private Results[] results;
 	private QuestionJson[] results;
 	
 	public String getResponse_code() {

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ex.beans.game.GameSessionBean;
-import com.ex.beans.game.JoinLobbyResponse;
-import com.ex.beans.game.PlayerBean;
+import com.ex.game.GameSessionBean;
+import com.ex.game.PlayerBean;
+import com.ex.messages.JoinLobbyMessage;
 import com.ex.services.GameManagerService;
 
 @RestController
@@ -26,7 +26,7 @@ public class CreateGameController {
         
 	@CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public JoinLobbyResponse createGame(HttpServletRequest req, HttpServletResponse resp) {
+    public JoinLobbyMessage createGame(HttpServletRequest req, HttpServletResponse resp) {
         GameManagerService service = GameManagerService.getInstance();
         int id = service.createGame();
         logger.trace(service.gameList.size());
@@ -55,7 +55,7 @@ public class CreateGameController {
         
         gs.addPlayer(player);
         
-        JoinLobbyResponse message = new JoinLobbyResponse();
+        JoinLobbyMessage message = new JoinLobbyMessage();
         
         message.setUserId(player.getPlayerId());
         message.setLobbyId(new StringBuffer(count + ""));
