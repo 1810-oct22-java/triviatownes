@@ -7,6 +7,13 @@ public class JoinLobbyResponse {
 	int hasError;
 	StringBuffer error;
 	
+	public synchronized StringBuffer getScope() {
+		return scope;
+	}
+	public synchronized void setScope(StringBuffer scope) {
+		this.scope = scope;
+	}
+	StringBuffer scope;
 	StringBuffer lobbyName;
 	StringBuffer category;
 	int questions;

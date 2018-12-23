@@ -14,45 +14,46 @@ public class GameSessionBean {
 	
 	private static Logger logger = Logger.getLogger(StartGameController.class);
 	
-	QuestionBean currentQuestion;
+	public QuestionBean currentQuestion;
 	
-	int currentAnswers;
+	public int currentAnswers;
 	
-	int currentQuestionIndex;
+	public int currentQuestionIndex;
 
-	long startTime;
+	public long startTime;
 	
-	long currentTime;
+	public long currentTime;
 	
-	int instanceId;
+	public int instanceId;
 	
-	StringBuffer joinKey;
+	public StringBuffer joinKey;
 	
 	public int numberOfQuestions;
 
 	int state;
 	
-	StringBuffer globalChatBuffer;
+	public StringBuffer globalChatBuffer;
 	
-	StringBuffer category;
+	public StringBuffer category;
 	
-	StringBuffer difficulty;
+	public StringBuffer difficulty;
 	
-	StringBuffer name;
+	public StringBuffer name;
 	
-	StringBuffer scope;
+	public StringBuffer scope;
 	
 	long roundTime = 20;
+	long waitTime = 2;
 	
-	public int count = 0;
+	public int count = 50;
 
 	public ArrayList<PlayerBean> currentPlayers;
 	
-	int maxPlayers;
+	public int maxPlayers;
 	
-	int currentAnswerCounter;
+	public int currentAnswerCounter;
 	
-	ArrayList<QuestionBean> Questions;
+	public ArrayList<QuestionBean> Questions;
 	
 	public synchronized void setUserConnected(int id) {
 		
@@ -64,9 +65,9 @@ public class GameSessionBean {
 		
 	}
 	
-	public synchronized void waitForConnection() {
+	public synchronized void waitSeconds(int n) {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(n * 1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -128,26 +129,40 @@ public class GameSessionBean {
 					HighScorePlayerBean hb = new HighScorePlayerBean(pb.getUsername().toString(),pb.getScore(),pb.getMaxStreak(),pb.getRightAnswers());
 					ls.save(hb);
 				}
-				//Access repo service
 				
 				return;
 			}
 			
+			if(this.state == 1) {
+				logger.trace("if");
+				this.state = 3;
+				this.currentAnswerCounter = 0;
+				//Set the current timer;
+				this.setStartTime(System.currentTimeMillis());
+				logger.trace(System.currentTimeMillis());
+				long now = System.currentTimeMillis();
+				this.setCurrentTime(this.waitTime - ((now - this.getStartTime())/1000));
+				logger.trace("Find me");
+				logger.trace(((now - this.getStartTime())/1000));
+			} else {
+				this.state = 1;
+				logger.trace("else");
+
 			//Get the new question
 			this.loadNewQuestion();
 			
-			//Set the timer back to 20 seconds;
 			this.resetTimer();
-			
-			return;
+			}
 		}
-		
-		
 		
 		//Game is still going on, update time
 		//Set current time
 		long now = System.currentTimeMillis();
-		this.setCurrentTime(this.roundTime - ((now - this.getStartTime())/1000));
+		if(this.state == 3) {
+			this.setCurrentTime(this.waitTime - ((now - this.getStartTime())/1000));
+		} else {
+			this.setCurrentTime(this.roundTime - ((now - this.getStartTime())/1000));
+		}
 		if(this.getCurrentTime() < 0) this.setCurrentTime(0);
 				
 	}

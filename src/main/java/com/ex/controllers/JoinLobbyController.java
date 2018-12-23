@@ -59,6 +59,7 @@ public class JoinLobbyController {
 	        message.setCategory(game.getCategory());
 	        message.setLobbyName(game.getName());
 	        message.setQuestions(game.numberOfQuestions);
+	        message.setScope(game.getScope());
 	        
 	        HttpSession session = req.getSession();
 	        session.setAttribute("playerId", game.count);

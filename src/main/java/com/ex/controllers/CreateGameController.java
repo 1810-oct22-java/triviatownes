@@ -37,6 +37,7 @@ public class CreateGameController {
         gs.setMaxPlayers(new Integer(req.getParameter("seats")));
         gs.numberOfQuestions = new Integer(req.getParameter("questions"));
         gs.setName(new StringBuffer(req.getParameter("name")));
+        gs.setScope(new StringBuffer(req.getParameter("private")));
         
         logger.trace(gs.getJoinKey().toString());
         

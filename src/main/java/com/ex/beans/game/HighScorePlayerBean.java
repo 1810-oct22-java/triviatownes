@@ -28,7 +28,7 @@ public class HighScorePlayerBean implements Serializable{
 //@GeneratedValue(generator="U_SEQ_GEN", strategy=GenerationType.SEQUENCE)
 	private int id;
 	
-	@Column(nullable=false, unique=true, name="USERNAME")
+	@Column(nullable=false, name="USERNAME")
 	private String username;
 	
 	@Column(nullable=false, name="SCORE")

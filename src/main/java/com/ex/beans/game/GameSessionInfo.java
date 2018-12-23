@@ -20,6 +20,7 @@ public class GameSessionInfo {
 	public int status;
 	
 	public GameSessionInfo(GameSessionBean game) {
+		/*
 		this.category = game.getCategory();
 		this.players = game.getCurrentPlayers().size();
 		this.maxPlayers = game.getMaxPlayers();
@@ -32,6 +33,20 @@ public class GameSessionInfo {
 		this.currentCountDown = game.getCurrentTime();
 		this.numberOfQuestions = game.getNumberOfQuestions();
 		this.currentQuestionNumber = game.getCurrentQuestionIndex() + 1;
+		this.status = game.state;
+		*/
+		this.category = game.category;
+		this.players = game.currentPlayers.size();
+		this.maxPlayers = game.maxPlayers;
+		this.name = game.name;
+		this.scope = game.scope;
+		this.difficulty = game.difficulty;
+		this.key = game.joinKey;
+		this.currentQuestion = game.currentQuestion;
+		this.numberOfAnswers = game.currentAnswerCounter;
+		this.currentCountDown = game.currentTime;
+		this.numberOfQuestions = game.numberOfQuestions;
+		this.currentQuestionNumber = game.currentQuestionIndex + 1;
 		this.status = game.state;
 	}
 	

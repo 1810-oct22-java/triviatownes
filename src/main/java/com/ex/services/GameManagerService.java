@@ -143,6 +143,8 @@ public class GameManagerService {
 			
 			if(gameList.get(i).getState() != 0) continue;
 			
+			if(gameList.get(i).getScope().toString().equals("true")) continue;
+			
 			if(category.equals("all") || category.equals(gameList.get(i).getCategory().toString().toLowerCase())) {
 			
 				GameSessionInfo temp = new GameSessionInfo();
